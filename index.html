@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Our Holy Matrimony</title>
+    <title>The Wedding Invitation</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;700&display=swap');
 
@@ -13,7 +13,7 @@
         /* Overlay Awal */
         #overlay {
             position: fixed; inset: 0; background: #fffcf5; z-index: 9999;
-            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px;
         }
 
         .btn-open {
@@ -22,49 +22,51 @@
             box-shadow: 0 4px 15px rgba(197, 160, 89, 0.4);
         }
 
-        /* Foto Utama Atas */
+        /* Foto Utama */
         .hero { padding: 40px 15px; text-align: center; }
         .main-photo {
-            width: 100%; max-width: 400px; border-radius: 15px;
+            width: 100%; max-width: 350px; border-radius: 20px;
             border: 8px solid #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
-        /* Grid 4 Foto di Bawah */
+        /* Grid 4 Foto (Dibawah) */
         .photo-grid {
             display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-            padding: 0 15px; max-width: 400px; margin: 20px auto;
+            padding: 0 20px; max-width: 400px; margin: 20px auto;
         }
         .photo-grid img {
             width: 100%; aspect-ratio: 1/1; object-fit: cover;
-            border-radius: 10px; border: 4px solid #fff;
+            border-radius: 12px; border: 4px solid #fff;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
-        .couple-name { font-family: 'Great Vibes', cursive; font-size: 3rem; color: #c5a059; margin: 25px 0; text-align: center; }
+        .couple-name { font-family: 'Great Vibes', cursive; font-size: 3rem; color: #c5a059; margin: 20px 0; }
 
         .card { 
-            background: #fff; padding: 25px; border-radius: 15px; width: 90vw; max-width: 380px;
+            background: #fff; padding: 25px; border-radius: 20px; width: 90vw; max-width: 380px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.05); margin: 20px auto; text-align: center;
         }
 
-        .btn-action {
-            display: inline-block; background: #c5a059; color: white; 
+        .btn-wa {
+            display: inline-block; background: #25d366; color: white; 
             padding: 12px 25px; border-radius: 25px; text-decoration: none;
             font-weight: bold; margin-top: 15px; font-size: 14px;
         }
 
         .timer { display: flex; justify-content: center; gap: 8px; margin-top: 15px; }
-        .timer div { background: #c5a059; color: #fff; padding: 8px; border-radius: 8px; min-width: 60px; }
+        .timer div { background: #c5a059; color: #fff; padding: 8px; border-radius: 8px; min-width: 65px; }
+        .timer span { display: block; font-size: 16px; font-weight: bold; }
+        .timer label { font-size: 10px; }
     </style>
 </head>
 <body>
 
     <div id="overlay">
-        <p style="letter-spacing: 3px; font-size: 10px;">WEDDING INVITATION</p>
-        <h1 style="font-family: 'Great Vibes'; font-size: 2.5rem; color: #c5a059;">Romeo & Juliet</h1>
-        <p style="margin-top: 20px; font-size: 12px;">Yth. Bapak/Ibu:</p>
-        <h2 id="guestTarget">PRESIDEN RI</h2>
-        <button class="btn-open" onclick="startApp()">BUKA UNDANGAN</button>
+        <p style="letter-spacing: 4px; font-size: 10px; color: #c5a059;">THE WEDDING OF</p>
+        <h1 style="font-family: 'Great Vibes'; font-size: 2.8rem; color: #c5a059; margin: 10px 0;">Romeo & Juliet</h1>
+        <p style="margin-top: 20px; font-size: 13px;">Kepada Yth. Sahabat & Keluarga:</p>
+        <h2 style="margin: 5px 0; color: #444;">Tamu Undangan</h2>
+        <button class="btn-open" onclick="startApp()">Buka Undangan</button>
     </div>
 
     <audio id="bgm" loop>
@@ -73,14 +75,17 @@
 
     <div id="mainContent" style="display:none;">
         <div class="hero">
-            <img src="AI (6).jpg" class="main-photo" alt="Main Photo">
+            <img src="AI (6).jpg" class="main-photo">
             <h1 class="couple-name">Romeo & Juliet</h1>
+            <p style="font-size: 14px; color: #888; font-style: italic;">"Menyatukan dua hati dalam ikatan suci"</p>
         </div>
 
         <div class="photo-grid">
             <img src="AI (71).jpg">
             <img src="AI (80).jpg">
-            <img src="AI (6).jpg"> <img src="AI (71).jpg"> </div>
+            <img src="AI (6).jpg">
+            <img src="AI (71).jpg">
+        </div>
 
         <div class="card">
             <p style="font-size: 12px; font-weight: bold; letter-spacing: 2px;">COUNTDOWN</p>
@@ -92,16 +97,22 @@
         </div>
 
         <div class="card">
-            <h3 id="guestNameDisplay">PRESIDEN RI</h3>
-            <p id="aiStatus" style="font-style: italic; color: #888; font-size: 14px; margin-top: 10px;">Menghubungkan AI...</p>
-            <a href="https://wa.me/628123456789" class="btn-action" style="background: #25d366;">RSVP VIA WHATSAPP</a>
+            <h3 style="color: #c5a059;">AKAD & RESEPSI</h3>
+            <p style="margin-top: 10px;"><strong>Sabtu, 14 Februari 2026</strong></p>
+            <p style="font-size: 14px;">Gedung Agung Digital, Jakarta</p>
+        </div>
+
+        <div class="card">
+            <h3>Tamu Undangan</h3>
+            <p style="font-size: 14px; color: #777; margin: 10px 0;">Kehadiran Anda adalah kebahagiaan bagi kami.</p>
+            <a href="https://wa.me/628123456789?text=Halo,%20saya%20akan%20datang" class="btn-wa">KONFIRMASI KEHADIRAN</a>
         </div>
         
-        <div style="height: 50px;"></div>
+        <div style="height: 60px;"></div>
     </div>
 
 <script>
-    // Timer
+    // Countdown Timer
     const target = new Date("Feb 14, 2026 09:00:00").getTime();
     setInterval(() => {
         const now = new Date().getTime();
@@ -111,35 +122,14 @@
         document.getElementById('m').innerText = Math.floor((diff % 3600000) / 60000);
     }, 1000);
 
-    async function startApp() {
+    function startApp() {
+        // Hilangkan overlay dan tampilkan konten
         document.getElementById('overlay').style.display = 'none';
         document.getElementById('mainContent').style.display = 'block';
         
-        const music = document.getElementById('bgm');
-        music.play().catch(e => console.log("Music blocked"));
-
-        const guest = document.getElementById('guestNameDisplay').innerText;
-        const status = document.getElementById('aiStatus');
-        const fallback = `Selamat datang Yang Mulia ${guest}. Suatu kehormatan besar bagi kami atas kehadiran Anda.`;
-
-        try {
-            const res = await fetch(`https://text.pollinations.ai/${encodeURIComponent("Sapa tamu " + guest + " dengan sangat sopan untuk hadir di pernikahan kami")}`);
-            if(!res.ok) throw new Error();
-            const text = await res.text();
-            status.innerText = text;
-            speak(text);
-        } catch(e) {
-            status.innerText = fallback;
-            speak(fallback);
-        }
-    }
-
-    function speak(t) {
-        window.speechSynthesis.cancel();
-        const s = new SpeechSynthesisUtterance(t);
-        s.lang = 'id-ID';
-        s.rate = 0.9;
-        window.speechSynthesis.speak(s);
+        // Putar Musik
+        const audio = document.getElementById('bgm');
+        audio.play().catch(e => console.log("Lagu tidak bisa diputar otomatis karena kebijakan browser"));
     }
 </script>
 </body>
