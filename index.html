@@ -3,145 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>The Royal Wedding</title>
+    <title>Undangan Pernikahan Digital</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@400;700&family=Montserrat:wght@300&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;700&display=swap');
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: #fffcf5; color: #5d4037; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+        body { background: #fffcf5; color: #4a4a4a; font-family: 'Montserrat', sans-serif; line-height: 1.6; }
 
-        /* Kelopak Bunga Gugur */
-        .petal {
-            position: fixed; top: -10px; z-index: 999;
-            color: #ffb7c5; font-size: 20px; pointer-events: none;
-            animation: fall linear forwards;
-        }
-        @keyframes fall {
-            to { transform: translateY(100vh) rotate(360deg); opacity: 0; }
-        }
-
-        /* Overlay Pembuka */
+        /* Overlay */
         #overlay {
-            position: fixed; inset: 0; background: #fffcf5; z-index: 10000;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-align: center;
+            position: fixed; inset: 0; background: #fffcf5; z-index: 9999;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
         }
 
-        .wedding-btn {
-            background: #d4af37; color: white; border: none; padding: 15px 40px;
-            font-family: 'Cinzel', serif; font-size: 14px; border-radius: 30px;
-            cursor: pointer; box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
-            margin-top: 20px;
+        .btn-open {
+            background: #c5a059; color: #fff; border: none; padding: 12px 30px;
+            border-radius: 25px; font-weight: bold; cursor: pointer; margin-top: 20px;
         }
 
-        /* Section 1: Hero Foto */
-        .hero {
-            width: 100%; height: 100vh; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; position: relative;
+        /* Hero Section */
+        .section { padding: 60px 20px; text-align: center; width: 100%; }
+        .hero-img { 
+            width: 85vw; height: 110vw; max-width: 350px; 
+            border: 10px solid #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            object-fit: cover; border-radius: 10px;
         }
 
-        .photo-frame {
-            width: 85vw; height: 115vw; max-width: 350px;
-            border: 15px solid #fff; outline: 1px solid #d4af37;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            overflow: hidden; position: relative;
-        }
-        .photo-frame img { width: 100%; height: 100%; object-fit: cover; }
-
-        /* Section 2: Content */
-        .content {
-            padding: 60px 20px; text-align: center; background: #fffcf5;
+        .couple-name { font-family: 'Great Vibes', cursive; font-size: 3rem; color: #c5a059; margin: 20px 0; }
+        
+        /* RSVP & Box */
+        .card { 
+            background: #fff; padding: 25px; border-radius: 15px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 30px;
         }
 
-        .couple-name {
-            font-family: 'Great Vibes', cursive; font-size: 3.5rem;
-            color: #d4af37; text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
-            margin-bottom: 10px;
+        .btn-wa {
+            display: inline-block; background: #25d366; color: white; 
+            padding: 12px 25px; border-radius: 25px; text-decoration: none;
+            font-weight: bold; margin-top: 15px; font-size: 14px;
         }
 
-        .guest-box {
-            background: #fff; border: 1px solid #eee; padding: 20px;
-            margin: 20px auto; width: 90%; border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
+        #aiVoiceText { font-style: italic; font-size: 14px; color: #777; margin: 15px 0; }
 
-        #aiGreeting {
-            font-style: italic; color: #7f8c8d; font-size: 14px; line-height: 1.8;
-        }
-
-        .event-info { font-family: 'Cinzel', serif; letter-spacing: 2px; font-size: 12px; margin-top: 30px; }
+        /* Countdown */
+        .timer { display: flex; justify-content: center; gap: 10px; margin: 20px 0; }
+        .timer div { background: #c5a059; color: #fff; padding: 10px; border-radius: 8px; min-width: 60px; }
+        .timer span { display: block; font-size: 18px; font-weight: bold; }
+        .timer label { font-size: 10px; text-transform: uppercase; }
     </style>
 </head>
 <body>
 
     <div id="overlay">
-        <h2 style="font-family: 'Cinzel'; letter-spacing: 5px;">THE WEDDING OF</h2>
-        <h1 style="font-family: 'Great Vibes'; font-size: 3rem; color: #d4af37;">Romeo & Juliet</h1>
-        <button class="wedding-btn" onclick="startWedding()">Buka Undangan</button>
+        <h2 style="font-size: 14px; letter-spacing: 3px;">THE WEDDING OF</h2>
+        <h1 style="font-family: 'Great Vibes'; font-size: 2.5rem; color: #c5a059; margin: 10px 0;">Romeo & Juliet</h1>
+        <p style="font-size: 12px;">Kepada Yth:</p>
+        <h3 id="guestTarget">Tamu Kehormatan</h3>
+        <button class="btn-open" onclick="bukaUndangan()">Buka Undangan</button>
     </div>
 
-    <audio id="weddingMusic" loop>
+    <audio id="music" loop>
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
     </audio>
 
-    <div id="mainApp" style="display:none;">
-        <section class="hero">
-            <div class="photo-frame">
-                <img src="https://github.com/USERNAME_LO.png" alt="Couple">
-            </div>
-            <p style="margin-top: 20px; font-size: 10px; letter-spacing: 5px;">SCROLL KE BAWAH</p>
+    <div id="mainContent" style="display:none;">
+        <section class="section">
+            <img src="https://github.com/USERNAME_LO.png" class="hero-img">
+            <h1 class="couple-name">Romeo & Juliet</h1>
+            <p>“Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri...”</p>
         </section>
 
-        <section class="content">
-            <h1 class="couple-name">Romeo & Juliet</h1>
-            <p style="font-size: 12px; letter-spacing: 3px;">UNTUK TAMU KEHORMATAN:</p>
-            
-            <div class="guest-box">
-                <h2 id="guestName" style="font-family: 'Cinzel'; margin-bottom: 15px;">PRESIDEN RI</h2>
-                <p id="aiGreeting">Menyiapkan pesan cinta dari AI...</p>
+        <section class="section" style="background: #fdf8ef;">
+            <div class="card">
+                <h3 style="font-family: 'Montserrat'; letter-spacing: 2px;">MENANTI HARI BAHAGIA</h3>
+                <div class="timer">
+                    <div><span id="days">0</span><label>Hari</label></div>
+                    <div><span id="hours">0</span><label>Jam</label></div>
+                    <div><span id="mins">0</span><label>Menit</label></div>
+                </div>
             </div>
 
-            <div class="event-info">
-                <p>SABTU, 14 FEBRUARI 2026</p>
-                <p>GRAND BALLROOM ISTANA</p>
+            <div class="card">
+                <h2 style="color: #c5a059;">AKAD & RESEPSI</h2>
+                <div style="height: 1px; background: #c5a059; width: 50%; margin: 15px auto;"></div>
+                <p><strong>Sabtu, 14 Februari 2026</strong></p>
+                <p>Pukul 09.00 - Selesai</p>
+                <p style="margin-top: 10px;">Gedung Agung Istana Digital<br>Jakarta Selatan</p>
+                <a href="https://maps.google.com" target="_blank" class="btn-wa" style="background: #c5a059;">LIHAT LOKASI MAPS</a>
+            </div>
+
+            <div class="card">
+                <h3 id="guestNameDisplay">PRESIDEN RI</h3>
+                <p id="aiVoiceText">Memuat sambutan hangat...</p>
+                <a href="https://wa.me/628123456789?text=Halo%20saya%20akan%20datang" class="btn-wa">KONFIRMASI KEHADIRAN (RSVP)</a>
             </div>
         </section>
     </div>
 
 <script>
-    function createPetal() {
-        const petal = document.createElement('div');
-        petal.classList.add('petal');
-        petal.innerHTML = '🌸';
-        petal.style.left = Math.random() * 100 + 'vw';
-        petal.style.animationDuration = Math.random() * 3 + 2 + 's';
-        document.body.appendChild(petal);
-        setTimeout(() => petal.remove(), 5000);
-    }
+    // Countdown Timer
+    const targetDate = new Date("Feb 14, 2026 09:00:00").getTime();
+    setInterval(() => {
+        const now = new Date().getTime();
+        const diff = targetDate - now;
+        document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+        document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        document.getElementById('mins').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    }, 1000);
 
-    async function startWedding() {
+    async function bukaUndangan() {
         document.getElementById('overlay').style.display = 'none';
-        document.getElementById('mainApp').style.display = 'block';
-        
-        document.getElementById('weddingMusic').play();
-        setInterval(createPetal, 300);
+        document.getElementById('mainContent').style.display = 'block';
+        document.getElementById('music').play();
 
-        const guest = document.getElementById('guestName').innerText;
-        const aiText = document.getElementById('aiGreeting');
+        const guest = document.getElementById('guestNameDisplay').innerText;
+        const textDisplay = document.getElementById('aiVoiceText');
 
         try {
-            const prompt = encodeURIComponent(`Buat ucapan selamat datang pernikahan yang sangat romantis, elegan, dan menyentuh hati untuk tamu bernama ${guest}.`);
-            const res = await fetch(`https://text.pollinations.ai/${prompt}?model=openai`);
-            const data = await res.text();
-            aiText.innerText = data;
+            const prompt = encodeURIComponent(`Buat ucapan singkat pernikahan sangat sopan untuk ${guest} agar hadir di pernikahan Romeo dan Juliet.`);
+            const res = await fetch(`https://text.pollinations.ai/${prompt}`);
+            const text = await res.text();
+            textDisplay.innerText = text;
 
-            const speech = new SpeechSynthesisUtterance(data);
+            const speech = new SpeechSynthesisUtterance(text);
             speech.lang = 'id-ID';
-            speech.rate = 0.9;
             window.speechSynthesis.speak(speech);
-        } catch(e) {
-            aiText.innerText = "Kehadiran Anda adalah kado terindah bagi kebahagiaan kami.";
-        }
+        } catch(e) { textDisplay.innerText = "Kehadiran Anda adalah kehormatan bagi kami."; }
     }
 </script>
 </body>
