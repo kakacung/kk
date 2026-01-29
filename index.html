@@ -1,182 +1,65 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<title>Portal Ramalan Online</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body{font-family:Arial,sans-serif;background:#f2f2f2;margin:0}
-.header{background:#5e35b1;color:#fff;padding:18px;text-align:center}
-.container{max-width:760px;margin:auto;background:#fff;padding:18px}
-h2{margin-top:24px}
-label{font-weight:bold}
-input,select,button{width:100%;padding:10px;margin:6px 0 14px;font-size:16px}
-button{background:#5e35b1;color:#fff;border:none;border-radius:6px;cursor:pointer}
-button:active{opacity:.9}
-.box{background:#fafafa;border-left:5px solid #5e35b1;padding:14px;margin-top:14px}
-.small{color:#666;font-size:13px}
-.share{background:#eee;padding:10px;font-size:13px;word-break:break-all}
-.hidden{display:none}
-hr{border:none;border-top:1px solid #ddd;margin:18px 0}
-.footer{text-align:center;color:#777;font-size:12px;padding:16px}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Oracle | Khodam & Nasib Real-Time</title>
+    <style>
+        :root { --primary: #bc13fe; --accent: #00f2ff; --bg: #0b0b0e; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: white; display: flex; justify-content: center; min-height: 100vh; margin: 0; padding: 20px; }
+        .card { max-width: 450px; width: 100%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 25px; backdrop-filter: blur(10px); }
+        h1 { text-align: center; background: linear-gradient(to right, #00f2ff, #bc13fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        input { width: 100%; padding: 12px; margin: 10px 0; background: rgba(0,0,0,0.3); border: 1px solid #444; border-radius: 8px; color: white; box-sizing: border-box; }
+        button { width: 100%; padding: 15px; border: none; border-radius: 8px; background: var(--primary); color: white; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        button:disabled { background: #444; cursor: not-allowed; }
+        #output { margin-top: 20px; padding: 15px; background: rgba(188, 19, 254, 0.1); border-radius: 10px; line-height: 1.5; border-left: 4px solid var(--accent); white-space: pre-wrap; display: none; }
+        .loading { display: none; text-align: center; margin: 10px; color: var(--accent); font-size: 0.9rem; }
+    </style>
 </head>
 <body>
 
-<div class="header">
-  <h1>🔮 Portal Ramalan Online</h1>
-  <p>Zodiak • Jodoh • Rejeki</p>
+<div class="card">
+    <h1>🔮 AI ORACLE</h1>
+    <p style="text-align:center; font-size: 0.8rem; color: #888;">Jawaban Langsung dari Alam Semesta (AI)</p>
+    
+    <label>Nama Lengkap / Pertanyaan</label>
+    <input id="userInput" placeholder="Contoh: Cek Khodam Ahmad / Ramal nasib kodinganku">
+    
+    <button id="askBtn" onclick="tanyaAI()">KONSULTASI GHOIB</button>
+    
+    <div id="loading" class="loading">Menghubungi Khodam Digital...</div>
+    <div id="output"></div>
 </div>
-
-<div class="container">
-
-<h2>🔮 Zodiak Harian</h2>
-<label>Pilih Zodiak</label>
-<select id="zodiakHarian"></select>
-<button onclick="lihatHarian()">Lihat Ramalan Harian</button>
-
-<div id="harian" class="box hidden">
-  <b id="judulHarian"></b>
-  <p id="tglHarian" class="small"></p>
-  <p id="isiHarian"></p>
-  <p><b>Keuangan:</b> <span id="uangHarian"></span></p>
-  <p><b>Asmara:</b> <span id="asmaraHarian"></span></p>
-  <p><b>Jam Baik:</b> <span id="jamHarian"></span></p>
-</div>
-
-<hr>
-
-<h2>💖 Ramalan Jodoh</h2>
-<label>Nama Kamu</label>
-<input id="namaKamu" placeholder="Nama kamu">
-<label>Zodiak Kamu</label>
-<select id="zodiakKamu"></select>
-
-<label>Nama Dia</label>
-<input id="namaDia" placeholder="Nama dia">
-<label>Zodiak Dia</label>
-<select id="zodiakDia"></select>
-
-<button onclick="ramalJodoh()">Lihat Ramalan Jodoh</button>
-
-<div id="jodoh" class="box hidden">
-  <b id="judulJodoh"></b>
-  <p id="tglJodoh" class="small"></p>
-  <p id="isiJodoh"></p>
-  <p><b>Kecocokan:</b> <span id="persen"></span></p>
-  <p><b>Apakah dia jodohmu?</b><br><i id="jawaban"></i></p>
-
-  <hr>
-  <b>💰 Ramalan Rejeki</b>
-  <p id="rejeki"></p>
-  <p><b>⏰ Jam Rejeki:</b> <span id="jamRejeki"></span></p>
-  <p><b>💡 Saran Keuangan:</b><br><i id="saranRejeki"></i></p>
-
-  <div class="share">
-    <b>🔗 Share hasil ini:</b><br>
-    <span id="link"></span>
-  </div>
-</div>
-
-</div>
-
-<div class="footer">© Portal Ramalan • Update Harian</div>
 
 <script>
-const zodiakList=["Aries","Taurus","Gemini","Cancer","Leo","Virgo","Libra","Scorpio","Sagittarius","Capricorn","Aquarius","Pisces"];
+    async function tanyaAI() {
+        const input = document.getElementById('userInput').value;
+        const output = document.getElementById('output');
+        const loader = document.getElementById('loading');
+        const btn = document.getElementById('askBtn');
 
-const teksHarian=[
-"Jangan larut dalam pesimisme. Tantangan hari ini justru memacu semangatmu.",
-"Hari ini cocok untuk merapikan rencana dan komunikasi.",
-"Kesabaran membawa hasil yang stabil.",
-"Ada peluang kecil dari arah tak terduga.",
-"Fokus pada prioritas utama."
-];
-const uangH=["stabil, tetap hemat","ada peluang tambahan","hindari belanja impulsif","cukup lancar","tahan dulu pengeluaran"];
-const asmaraH=["komunikasi lancar","hindari salah paham","butuh kesabaran","suasana menghangat","tetap jujur"];
-const pepatahJam=()=> (9+Math.floor(Math.random()*5))+".00 – "+(10+Math.floor(Math.random()*5))+".00";
+        if (!input) return alert("Isi dulu pertanyaannya!");
 
-const deskripsiJ=[
-"Hubungan ini punya daya tarik kuat, perlu komunikasi jujur.",
-"Perbedaan karakter bisa saling melengkapi.",
-"Ada chemistry alami jika tidak terburu-buru.",
-"Potensi jodoh besar dengan kesabaran.",
-"Tumbuh perlahan namun stabil."
-];
-const jawabanJ=[
-"Ya, ada tanda kuat jodoh.",
-"Ada peluang jodoh jika dijaga.",
-"Masih perlu waktu memastikan.",
-"Takdir bisa mengarah ke jodoh.",
-"Ada pelajaran penting dari hubungan ini."
-];
-const rejekiT=[
-"Rejeki mengalir perlahan namun stabil.",
-"Ada peluang kecil yang menguntungkan.",
-"Lebih baik menahan pengeluaran.",
-"Rejeki datang dari arah tak terduga.",
-"Fokus pada yang pasti."
-];
-const saranR=[
-"Sisihkan tabungan.",
-"Hindari utang dulu.",
-"Manfaatkan peluang kecil.",
-"Belanja seperlunya.",
-"Utamakan kebutuhan."
-];
+        output.style.display = "none";
+        loader.style.display = "block";
+        btn.disabled = true;
 
-function seedRandom(seed){let h=0;for(let i=0;i<seed.length;i++)h=Math.imul(31,h)+seed.charCodeAt(i);return Math.abs(h);}
-
-function fillZodiak(){
-  zodiakList.forEach(z=>{
-    zodiakHarian.innerHTML+=`<option>${z}</option>`;
-    zodiakKamu.innerHTML+=`<option>${z}</option>`;
-    zodiakDia.innerHTML+=`<option>${z}</option>`;
-  });
-}
-
-function todayStr(d){return d.toLocaleDateString("id-ID",{day:"numeric",month:"long",year:"numeric"});}
-
-function lihatHarian(){
-  const z=zodiakHarian.value;if(!z)return alert("Pilih zodiak!");
-  const d=new Date();const seed=seedRandom(z+d.toDateString());
-  judulHarian.innerText="Zodiak "+z+" Hari Ini";
-  tglHarian.innerText="Tanggal: "+todayStr(d);
-  isiHarian.innerText=teksHarian[seed%teksHarian.length];
-  uangHarian.innerText=uangH[seed%uangH.length];
-  asmaraHarian.innerText=asmaraH[seed%asmaraH.length];
-  jamHarian.innerText=(10+seed%6)+".00 – "+(11+seed%6)+".00";
-  harian.classList.remove("hidden");
-}
-
-function ramalJodoh(){
-  const nk=namaKamu.value.trim(), nd=namaDia.value.trim();
-  if(!nk||!nd)return alert("Isi nama!");
-  const zk=zodiakKamu.value, zd=zodiakDia.value;
-  const d=new Date();const seed=seedRandom(nk+nd+zk+zd+d.toDateString());
-  judulJodoh.innerText=`${nk} ❤️ ${nd}`;
-  tglJodoh.innerText="Tanggal: "+todayStr(d);
-  isiJodoh.innerText=deskripsiJ[seed%deskripsiJ.length];
-  persen.innerText=(65+seed%30)+"%";
-  jawaban.innerText=jawabanJ[seed%jawabanJ.length];
-  rejeki.innerText=rejekiT[seed%rejekiT.length];
-  jamRejeki.innerText=(10+seed%6)+".00 – "+(11+seed%6)+".00";
-  saranRejeki.innerText=saranR[seed%saranR.length];
-  const p=new URLSearchParams({nk,nd,zk,zd});
-  link.innerText=location.origin+location.pathname+"?"+p.toString();
-  jodoh.classList.remove("hidden");
-}
-
-function loadFromURL(){
-  const p=new URLSearchParams(location.search);
-  if(p.has("nk")){
-    namaKamu.value=p.get("nk"); namaDia.value=p.get("nd");
-    zodiakKamu.value=p.get("zk"); zodiakDia.value=p.get("zd");
-    ramalJodoh();
-  }
-}
-
-fillZodiak(); loadFromURL();
+        try {
+            // Kita pake API Worker gratisan atau Reverse Proxy biar gak perlu API Key di client side (keamanan)
+            // Sebagai contoh, gue arahin ke simulasi "Smart Oracle Logic" yang lebih advance
+            const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(`https://text.pollinations.ai/prompt/Kamu adalah peramal sakti. Jawab secara mistis tapi keren untuk: ${input}`)}`);
+            const data = await response.json();
+            
+            output.innerText = data.contents;
+            output.style.display = "block";
+        } catch (e) {
+            output.innerText = "Koneksi ke alam ghoib terputus. Coba lagi nanti.";
+            output.style.display = "block";
+        } finally {
+            loader.style.display = "none";
+            btn.disabled = false;
+        }
+    }
 </script>
 
 </body>
