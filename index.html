@@ -3,50 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Undangan Pernikahan</title>
+    <title>The Wedding of Romeo & Juliet</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;700&display=swap');
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { background: #fffcf5; color: #4a4a4a; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
 
         /* Overlay Awal */
         #overlay {
             position: fixed; inset: 0; background: #fffcf5; z-index: 9999;
-            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px;
         }
 
         .btn-open {
             background: #c5a059; color: #fff; border: none; padding: 15px 40px;
             border-radius: 30px; font-weight: bold; cursor: pointer; margin-top: 20px;
-            box-shadow: 0 4px 15px rgba(197, 160, 89, 0.4);
+            box-shadow: 0 4px 15px rgba(197, 160, 89, 0.4); text-transform: uppercase; letter-spacing: 2px;
         }
 
-        /* Foto & Layout */
+        /* Hero - Foto Utama */
         .hero { padding: 40px 15px; text-align: center; }
         .main-photo {
             width: 100%; max-width: 350px; border-radius: 20px;
             border: 8px solid #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
+
+        .couple-name { font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: #c5a059; margin: 25px 0; }
+
+        /* Grid Galeri */
         .photo-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-            padding: 0 20px; max-width: 400px; margin: 20px auto;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+            padding: 0 20px; max-width: 400px; margin: 30px auto;
         }
         .photo-grid img {
             width: 100%; aspect-ratio: 1/1; object-fit: cover;
             border-radius: 12px; border: 4px solid #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-        .couple-name { font-family: 'Great Vibes', cursive; font-size: 3rem; color: #c5a059; margin: 20px 0; }
+
+        /* Card Section */
         .card { 
-            background: #fff; padding: 25px; border-radius: 20px; width: 90vw; max-width: 380px;
+            background: #fff; padding: 30px 20px; border-radius: 20px; width: 90vw; max-width: 380px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.05); margin: 20px auto; text-align: center;
         }
+
+        .btn-action {
+            display: inline-block; padding: 12px 25px; border-radius: 25px; 
+            text-decoration: none; font-weight: bold; font-size: 14px; margin-top: 15px;
+            transition: 0.3s;
+        }
+
+        .btn-gold { background: #c5a059; color: #fff; }
+        .btn-wa { background: #25d366; color: #fff; }
+
+        /* Timer */
+        .timer { display: flex; justify-content: center; gap: 10px; margin-top: 15px; }
+        .timer div { background: #c5a059; color: #fff; padding: 10px; border-radius: 10px; min-width: 65px; }
+        .timer span { display: block; font-size: 20px; font-weight: bold; }
+        .timer label { font-size: 10px; text-transform: uppercase; }
     </style>
 </head>
 <body>
 
     <div id="overlay">
-        <h1 style="font-family: 'Great Vibes'; font-size: 2.5rem; color: #c5a059;">Romeo & Juliet</h1>
-        <p style="margin-top: 10px;">Kepada Yth. Tamu Undangan</p>
+        <p style="letter-spacing: 5px; font-size: 12px; color: #c5a059;">THE WEDDING OF</p>
+        <h1 style="font-family: 'Great Vibes'; font-size: 3rem; color: #c5a059; margin: 15px 0;">Romeo & Juliet</h1>
+        <p style="margin-top: 10px; font-size: 14px;">Kepada Yth. Sahabat & Keluarga:</p>
+        <h2 style="color: #444; margin: 5px 0;">Tamu Undangan</h2>
         <button class="btn-open" onclick="startApp()">Buka Undangan</button>
     </div>
 
@@ -55,10 +79,11 @@
     </audio>
 
     <div id="mainContent" style="display:none;">
-        <div class="hero">
+        <section class="hero">
             <img src="AI (6).jpg" class="main-photo">
             <h1 class="couple-name">Romeo & Juliet</h1>
-        </div>
+            <p style="font-style: italic; color: #888;">"Dua jiwa, satu hati, satu tujuan suci."</p>
+        </section>
 
         <div class="photo-grid">
             <img src="AI (71).jpg">
@@ -68,34 +93,55 @@
         </div>
 
         <div class="card">
-            <h3>Konfirmasi Kehadiran</h3>
-            <p style="font-size: 14px; margin: 10px 0;">Kami sangat menantikan kehadiran Anda.</p>
-            <a href="https://wa.me/628123456789" style="background:#25d366; color:white; padding:10px 20px; text-decoration:none; border-radius:20px; font-weight:bold;">WhatsApp RSVP</a>
+            <p style="font-size: 11px; font-weight: bold; letter-spacing: 3px; margin-bottom: 10px;">MENGHITUNG HARI</p>
+            <div class="timer">
+                <div><span id="d">0</span><label>Hari</label></div>
+                <div><span id="h">0</span><label>Jam</label></div>
+                <div><span id="m">0</span><label>Menit</label></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3 style="color: #c5a059;">AKAD & RESEPSI</h3>
+            <div style="height: 1px; background: #eee; width: 60%; margin: 15px auto;"></div>
+            <p><strong>Sabtu, 14 Februari 2026</strong></p>
+            <p>Pukul 09.00 WIB - Selesai</p>
+            <p style="margin-top: 10px; font-size: 14px;">Gedung Agung Digital<br>Jl. Raya Utama No. 1, Jakarta</p>
+            <a href="https://maps.google.com" target="_blank" class="btn-action btn-gold">LIHAT LOKASI MAPS</a>
+        </div>
+
+        <div class="card">
+            <h3>KEHADIRAN</h3>
+            <p style="font-size: 13px; margin: 10px 0; color: #666;">Merupakan kehormatan bagi kami jika Anda berkenan hadir.</p>
+            <a href="https://wa.me/628123456789?text=Halo%20Romeo%20%26%20Juliet%2C%20saya%20akan%20hadir%21" class="btn-action btn-wa">KONFIRMASI VIA WHATSAPP</a>
+        </div>
+
+        <div style="height: 60px; text-align: center; font-size: 10px; color: #ccc; letter-spacing: 2px;">
+            CREATED WITH LOVE
         </div>
     </div>
 
 <script>
+    // Countdown Logic
+    const weddingDate = new Date("Feb 14, 2026 09:00:00").getTime();
+    setInterval(() => {
+        const now = new Date().getTime();
+        const diff = weddingDate - now;
+        document.getElementById('d').innerText = Math.floor(diff / 86400000);
+        document.getElementById('h').innerText = Math.floor((diff % 86400000) / 3600000);
+        document.getElementById('m').innerText = Math.floor((diff % 3600000) / 60000);
+    }, 1000);
+
+    // Start App Function
     function startApp() {
-        // 1. Sembunyikan Overlay
         document.getElementById('overlay').style.display = 'none';
         document.getElementById('mainContent').style.display = 'block';
         
-        // 2. Mainkan Musik (PENTING: Harus di dalam fungsi klik)
+        // Music Trigger
         const audio = document.getElementById('bgm');
-        
-        // Coba play musik
-        var playPromise = audio.play();
-
-        if (playPromise !== undefined) {
-            playPromise.then(_ => {
-                console.log("Musik jalan!");
-            }).catch(error => {
-                console.log("Gagal putar musik secara otomatis: " + error);
-                // Jika masih gagal, buat tombol kecil "Mainkan Musik" manual
-                alert("Klik oke untuk mendengarkan lagu");
-                audio.play();
-            });
-        }
+        audio.play().catch(e => {
+            console.log("Autoplay dicegah browser, perlu interaksi pengguna.");
+        });
     }
 </script>
 </body>
