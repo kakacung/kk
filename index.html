@@ -16,7 +16,7 @@
             overflow-x: hidden;
         }
 
-        /* Ornamen Emas Pojok */
+        /* Ornamen Emas Pojok Sesuai Gambar */
         .floral {
             position: fixed; width: 180px; z-index: 1; opacity: 0.5;
             pointer-events: none;
@@ -33,10 +33,10 @@
         .btn-open {
             background: #d4af37; color: #000; border: none; padding: 12px 40px;
             border-radius: 50px; font-weight: bold; cursor: pointer; margin-top: 30px;
-            text-transform: uppercase; letter-spacing: 2px;
+            text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
         }
 
-        /* Hero */
+        /* Hero & Foto 3D */
         .hero { padding: 60px 20px; text-align: center; position: relative; z-index: 2; }
         
         .img-3d-frame {
@@ -47,7 +47,7 @@
         .main-photo {
             width: 100%; border-radius: 15px; border: 2px solid #d4af37;
             box-shadow: 0 20px 40px rgba(0,0,0,0.9);
-            transform: rotateY(-7deg) rotateX(5deg);
+            transform: rotateY(-7deg) rotateX(5deg); /* Efek 3D */
         }
 
         .couple-name { 
@@ -55,7 +55,7 @@
             color: #d4af37; margin: 25px 0; 
         }
 
-        /* Grid Foto */
+        /* Gallery Grid (Bawah Foto Utama) */
         .gallery {
             display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
             padding: 20px; max-width: 420px; margin: 0 auto;
@@ -65,22 +65,24 @@
             border-radius: 10px; border: 1px solid #d4af37;
         }
 
-        /* Card Info */
+        /* Card Informasi */
         .glass-card {
             background: rgba(25, 25, 25, 0.9);
             border: 1px solid #d4af37; border-radius: 20px;
             padding: 35px 25px; margin: 25px auto;
             width: 92vw; max-width: 380px; text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .timer { display: flex; justify-content: center; gap: 12px; margin-top: 20px; }
         .timer div { border: 1px solid #d4af37; padding: 10px; border-radius: 12px; min-width: 70px; }
         .timer span { display: block; font-size: 22px; font-weight: bold; color: #d4af37; }
+        .timer label { font-size: 9px; letter-spacing: 1px; }
 
         .btn-wa {
             display: inline-block; background: #d4af37; color: #000;
             padding: 13px 30px; border-radius: 50px; text-decoration: none;
-            font-weight: bold; margin-top: 20px; width: 100%;
+            font-weight: bold; margin-top: 20px; width: 100%; transition: 0.3s;
         }
     </style>
 </head>
@@ -92,10 +94,11 @@
     <div id="overlay">
         <p style="letter-spacing: 6px; font-size: 11px;">THE WEDDING OF</p>
         <h1 style="font-family: 'Sacramento'; font-size: 3.5rem; color: #d4af37; margin: 20px 0;">Romeo & Juliet</h1>
+        <p style="font-size: 13px; color: #888;">Yth. Tamu Undangan</p>
         <button class="btn-open" onclick="startApp()">Buka Undangan</button>
     </div>
 
-    <audio id="bgm" loop>
+    <audio id="bgm" loop preload="auto">
         <source src="08%20%231.mp3" type="audio/mpeg">
     </audio>
 
@@ -117,6 +120,7 @@
 
         <div class="glass-card">
             <h3 style="font-family: 'Playfair Display'; font-style: italic; font-size: 1.5rem;">Save The Date</h3>
+            <div style="height: 1px; background: #d4af37; width: 60px; margin: 15px auto;"></div>
             <p style="margin-top: 15px; font-weight: 600;">AKAD & RESEPSI</p>
             <p style="font-size: 14px; color: #bbb;">Sabtu, 14 Februari 2026</p>
             <p style="margin-top: 10px; font-size: 14px;">Gedung Agung Digital, Jakarta</p>
@@ -133,7 +137,7 @@
 
         <div class="glass-card">
             <h3 style="font-family: 'Playfair Display';">Konfirmasi Kehadiran</h3>
-            <a href="https://wa.me/628123456789" class="btn-wa">RSVP VIA WHATSAPP</a>
+            <a href="https://wa.me/628123456789?text=Saya%20akan%20datang" class="btn-wa">RSVP VIA WHATSAPP</a>
         </div>
         
         <div style="height: 100px;"></div>
@@ -153,7 +157,9 @@
     function startApp() {
         document.getElementById('overlay').style.display = 'none';
         document.getElementById('mainContent').style.display = 'block';
-        document.getElementById('bgm').play().catch(e => console.log("Play blocked"));
+        
+        const music = document.getElementById('bgm');
+        music.play().catch(e => console.log("Lagu butuh klik manual"));
     }
 </script>
 </body>
