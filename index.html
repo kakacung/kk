@@ -3,263 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>The Grand Royal Wedding</title>
+    <title>The Wedding of Romeo & Juliet</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Montserrat:wght@300;400;600&family=Sacramento&display=swap');
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
-        /* Background Velvet 3D */
         body { 
-            background: #2c0b0b; /* Warna dasar velvet */
-            color: #d4af37; /* Gold */
-            font-family: 'Lora', serif;
-            overflow-x: hidden; min-height: 100vh;
-            position: relative;
+            background: #0a0a0a; /* Hitam Pekat Elegan */
+            color: #d4af37; /* Emas */
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
         }
 
-        /* Efek Tekstur Velvet yang Bergerak */
-        .velvet-texture {
-            position: fixed; inset: 0;
-            background: radial-gradient(circle at 15% 50%, rgba(255,255,255,0.05) 0%, transparent 50%),
-                        radial-gradient(circle at 85% 50%, rgba(255,255,255,0.05) 0%, transparent 50%);
-            background-size: 200% 200%;
-            animation: panVelvet 20s linear infinite alternate;
-            z-index: -1;
+        /* Ornamen Bunga Emas di Pojok (Persis Gambar) */
+        .floral-ornament {
+            position: fixed; width: 150px; z-index: 1; opacity: 0.6;
+            pointer-events: none;
         }
-        @keyframes panVelvet {
-            0% { background-position: 0% 0%; }
-            100% { background-position: 100% 100%; }
-        }
+        .top-right { top: -20px; right: -20px; transform: rotate(180deg); }
+        .bottom-left { bottom: -20px; left: -20px; }
 
-        /* Overlay Pembuka */
+        /* Overlay Awal */
         #overlay {
-            position: fixed; inset: 0; background: #2c0b0b; z-index: 10000;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            opacity: 1; transition: opacity 1.5s ease-out;
+            position: fixed; inset: 0; background: #0a0a0a; z-index: 10000;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
         }
-        #overlay.fade-out { opacity: 0; }
 
         .btn-open {
-            background: linear-gradient(145deg, #d4af37, #b8860b);
-            color: #fff; border: none; padding: 15px 45px;
-            border-radius: 50px; font-weight: bold; cursor: pointer;
-            letter-spacing: 3px; box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-            text-transform: uppercase;
-            font-family: 'Playfair Display', serif;
-            transition: all 0.3s ease;
-        }
-        .btn-open:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,0.5); }
-
-        /* General Section Styling */
-        .section-content { 
-            padding: 50px 20px; text-align: center; max-width: 450px; margin: 0 auto;
-            position: relative; z-index: 1;
+            background: #d4af37; color: #000; border: none; padding: 12px 35px;
+            border-radius: 50px; font-weight: bold; cursor: pointer; margin-top: 30px;
+            text-transform: uppercase; letter-spacing: 2px; transition: 0.3s;
         }
 
-        /* Efek 3D pada Teks */
+        /* Hero Section */
+        .section { padding: 60px 20px; text-align: center; position: relative; z-index: 2; }
+        
+        .main-img-wrapper {
+            position: relative; width: 80vw; max-width: 320px; margin: 0 auto;
+            perspective: 1000px;
+        }
+        
+        .main-photo {
+            width: 100%; border-radius: 15px; border: 2px solid #d4af37;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+            transform: rotateY(-5deg) rotateX(5deg); /* Efek 3D */
+        }
+
         .couple-name { 
-            font-family: 'Playfair Display', serif; font-size: 4rem; 
-            color: #d4af37; margin: 25px 0 15px; 
-            text-shadow: 
-                1px 1px 0px rgba(0,0,0,0.5),
-                2px 2px 0px rgba(0,0,0,0.4),
-                3px 3px 0px rgba(0,0,0,0.3),
-                4px 4px 5px rgba(0,0,0,0.2);
-            font-weight: 700;
-        }
-        .subtitle { 
-            font-family: 'Lora', serif; font-size: 1.1rem; 
-            color: #eee; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-            margin-bottom: 30px;
+            font-family: 'Sacramento', cursive; font-size: 3.5rem; 
+            color: #d4af37; margin: 25px 0; 
         }
 
-        /* Foto dengan Frame Emas 3D */
-        .photo-frame {
-            position: relative; display: inline-block;
-            width: 85vw; max-width: 320px;
-            box-shadow: 
-                0 10px 20px rgba(0,0,0,0.5), /* Bayangan Utama */
-                inset 0 0 15px rgba(255,255,255,0.1), /* Kilau dalam */
-                0 0 0 5px #d4af37; /* Border Emas */
-            border-radius: 10px;
-            transform-style: preserve-3d;
-            transform: perspective(1000px) rotateX(5deg) rotateY(-5deg); /* Sedikit rotasi 3D */
-            transition: transform 0.5s ease;
-            margin-bottom: 30px;
+        /* Card Elegan (Glassmorphism Dark) */
+        .card-elegant {
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid #d4af37; border-radius: 15px;
+            padding: 30px 20px; margin: 20px auto;
+            width: 90vw; max-width: 380px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-        .photo-frame img {
-            width: 100%; height: auto; display: block;
-            border-radius: 8px; /* Sudut sedikit melengkung */
-            filter: brightness(1.1) contrast(1.05); /* Sedikit cerah & kontras */
-        }
-        .photo-frame:hover { transform: perspective(1000px) rotateX(0deg) rotateY(0deg); }
 
-        /* Galeri Grid 3D */
-        .gallery-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 15px;
-            margin-top: 40px;
+        .btn-gold-outline {
+            display: inline-block; border: 1px solid #d4af37; color: #d4af37;
+            padding: 10px 25px; border-radius: 50px; text-decoration: none;
+            font-size: 13px; margin-top: 15px; transition: 0.3s;
         }
-        .gallery-grid img {
+        .btn-gold-outline:hover { background: #d4af37; color: #000; }
+
+        /* Grid Galeri */
+        .gallery {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+            padding: 15px; max-width: 400px; margin: 0 auto;
+        }
+        .gallery img {
             width: 100%; aspect-ratio: 1/1; object-fit: cover;
-            border-radius: 8px;
-            box-shadow: 
-                0 5px 15px rgba(0,0,0,0.4),
-                inset 0 0 10px rgba(255,255,255,0.05);
-            border: 2px solid #b8860b;
-            transform: perspective(500px) rotateY(2deg); /* Efek 3D mini */
-            transition: transform 0.3s ease;
+            border-radius: 10px; border: 1px solid #d4af37;
         }
-        .gallery-grid img:hover { transform: perspective(500px) rotateY(0deg) scale(1.03); }
 
-        /* Card (Kotak Info) dengan Efek 3D */
-        .card-3d {
-            background: linear-gradient(145deg, #4d2626, #3b1c1c); /* Gradasi merah maroon gelap */
-            border-radius: 15px; padding: 30px; margin-top: 30px;
-            box-shadow: 
-                -5px -5px 15px rgba(0,0,0,0.6), /* Bayangan dalam */
-                5px 5px 15px rgba(0,0,0,0.3),  /* Bayangan luar */
-                inset 0 0 20px rgba(255,255,255,0.05); /* Kilau halus */
-            border: 1px solid #5e3333; /* Border halus */
-            transform: perspective(1000px) rotateX(3deg); /* Efek 3D */
-            transition: transform 0.5s ease;
-        }
-        .card-3d:hover { transform: perspective(1000px) rotateX(0deg); }
-
-        .card-3d h3 { 
-            font-family: 'Playfair Display', serif; color: #d4af37; 
-            margin-bottom: 20px; font-size: 1.6rem;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
-            letter-spacing: 1px;
-        }
-        .card-3d p { color: #ccc; font-size: 0.95rem; line-height: 1.7; margin-bottom: 10px; }
-        .card-3d strong { color: #d4af37; }
-
-        /* Tombol Aksi 3D */
-        .btn-action-3d {
-            display: inline-block; padding: 12px 28px; border-radius: 30px; 
-            text-decoration: none; font-weight: bold; font-size: 0.9rem; margin-top: 20px;
-            background: linear-gradient(145deg, #d4af37, #b8860b);
-            color: #fff;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4), inset 0 0 8px rgba(255,255,255,0.2);
-            transform: perspective(500px) translateZ(5px);
-            transition: all 0.3s ease;
-        }
-        .btn-action-3d:hover { transform: perspective(500px) translateZ(10px) translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.5); }
-
-        .btn-whatsapp-3d { background: linear-gradient(145deg, #25d366, #1da851); }
-        .btn-whatsapp-3d:hover { background: linear-gradient(145deg, #1da851, #25d366); }
-
-        /* Timer */
-        .timer { display: flex; justify-content: center; gap: 15px; margin-top: 20px; }
-        .timer div { text-align: center; }
-        .timer span { display: block; font-size: 2.2rem; font-family: 'Playfair Display', serif; color: #d4af37; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
-        .timer label { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: #bbb; }
-
-        .footer-text { margin-top: 50px; font-size: 0.7rem; color: #777; letter-spacing: 1px; }
+        .timer { display: flex; justify-content: center; gap: 15px; margin-top: 15px; }
+        .timer div { text-align: center; border: 1px solid #d4af37; padding: 10px; border-radius: 10px; min-width: 65px; }
+        .timer span { display: block; font-size: 20px; font-weight: bold; }
+        .timer label { font-size: 9px; text-transform: uppercase; color: #aaa; }
     </style>
 </head>
 <body>
 
-    <div class="velvet-texture"></div>
+    <img src="https://www.transparentpng.com/download/floral/wedding-invitation-floral-frame-free-png-G6XlF6.png" class="floral-ornament top-right">
+    <img src="https://www.transparentpng.com/download/floral/wedding-invitation-floral-frame-free-png-G6XlF6.png" class="floral-ornament bottom-left">
 
     <div id="overlay">
-        <h1 style="font-family: 'Playfair Display', serif; font-size: 4.5rem; color: #d4af37; text-shadow: 2px 2px 5px rgba(0,0,0,0.6);">R & J</h1>
-        <p style="font-size: 1.1rem; letter-spacing: 5px; color: #eee; margin: 15px 0 40px; text-shadow: 1px 1px 3px rgba(0,0,0,0.5);">THE ROYAL WEDDING</p>
-        <button class="btn-open" onclick="startApp()">OPEN INVITATION</button>
+        <p style="letter-spacing: 5px; font-size: 12px;">THE WEDDING OF</p>
+        <h1 style="font-family: 'Sacramento'; font-size: 3rem; color: #d4af37; margin: 15px 0;">Romeo & Juliet</h1>
+        <p style="font-size: 13px; color: #888;">Yth. Tamu Undangan</p>
+        <button class="btn-open" onclick="startApp()">Buka Undangan</button>
     </div>
 
-    <audio id="bgm" loop preload="auto">
+    <audio id="bgm" loop>
         <source src="08%20%231.mp3" type="audio/mpeg">
     </audio>
 
     <div id="mainContent" style="display:none;">
-        <div class="section-content">
-            <div class="photo-frame">
-                <img src="AI (6).jpg" alt="Main Couple Photo">
+        <div class="section">
+            <div class="main-img-wrapper">
+                <img src="AI (6).jpg" class="main-photo">
             </div>
             <h1 class="couple-name">Romeo & Juliet</h1>
-            <p class="subtitle">Dengan Hormat Mengundang Anda ke Perayaan Cinta Kami</p>
-
-            <div class="gallery-grid">
-                <img src="AI (71).jpg" alt="Wedding Gallery 1">
-                <img src="AI (80).jpg" alt="Wedding Gallery 2">
-                <img src="AI (6).jpg" alt="Wedding Gallery 3">
-                <img src="AI (71).jpg" alt="Wedding Gallery 4">
-            </div>
-
-            <div class="card-3d">
-                <h3>AKAD & RESEPSI</h3>
-                <p><strong>Sabtu, 14 Februari 2026</strong></p>
-                <p>Pukul 09.00 WIB - Selesai</p>
-                <p style="margin-top: 15px;"><strong>Grand Imperial Ballroom</strong><br>
-                    Jl. Kerajaan Indah No. 88, Jakarta
-                </p>
-                <a href="https://maps.google.com" target="_blank" class="btn-action-3d">LIHAT LOKASI MAPS</a>
-            </div>
-
-            <div class="card-3d">
-                <h3>HITUNG MUNDUR</h3>
-                <div class="timer">
-                    <div><span id="d">00</span><label>Hari</label></div>
-                    <div><span id="h">00</span><label>Jam</label></div>
-                    <div><span id="m">00</span><label>Menit</label></div>
-                </div>
-            </div>
-
-            <div class="card-3d">
-                <h3>WEDDING GIFT</h3>
-                <p>Doa restu Anda adalah kado terindah, namun jika ingin berbagi kebahagiaan:</p>
-                <div style="background: #3a1818; padding: 15px; border-radius: 10px; border: 1px solid #5e3333; margin-top: 15px;">
-                    <p style="color: #d4af37;"><strong>BANK BCA</strong></p>
-                    <p id="norek" style="font-size: 1.1rem; font-weight: bold; color: #eee;">1234567890</p>
-                    <p style="font-size: 0.9rem; color: #bbb;">a.n. Romeo / Juliet</p>
-                    <button onclick="copyNorek()" style="background:none; border:1px solid #d4af37; color:#d4af37; padding:8px 15px; font-size:0.75rem; margin-top:10px; border-radius:5px; cursor:pointer; transition:background 0.3s;">SALIN NO. REKENING</button>
-                </div>
-            </div>
-
-            <div class="card-3d">
-                <h3>KONFIRMASI KEHADIRAN</h3>
-                <p>Mohon informasikan kehadiran Anda agar kami dapat menyiapkan tempat terbaik:</p>
-                <a href="https://wa.me/628123456789?text=Halo%20Romeo%20%26%20Juliet%2C%20saya%20akan%20hadir%20di%20pernikahan%20kalian%21" class="btn-action-3d btn-whatsapp-3d">RSVP VIA WHATSAPP</a>
-            </div>
-
-            <p class="footer-text">Made with Elegance & Love</p>
+            <p style="letter-spacing: 3px; font-size: 12px; color: #aaa;">SABTU, 14 FEBRUARI 2026</p>
         </div>
+
+        <div class="gallery">
+            <img src="AI (71).jpg">
+            <img src="AI (80).jpg">
+            <img src="AI (6).jpg">
+            <img src="AI (71).jpg">
+        </div>
+
+        <div class="card-elegant">
+            <h3 style="font-family: 'Playfair Display'; italic; letter-spacing: 2px;">Detail Acara</h3>
+            <div style="height: 1px; background: #d4af37; width: 50px; margin: 15px auto;"></div>
+            <p style="font-weight: 600;">AKAD NIKAH</p>
+            <p style="font-size: 14px; color: #ccc;">09.00 - 10.00 WIB</p>
+            <p style="margin-top: 15px; font-weight: 600;">RESEPSI</p>
+            <p style="font-size: 14px; color: #ccc;">11.00 - Selesai</p>
+            <p style="margin-top: 15px; font-size: 14px;">Gedung Agung Digital<br>Jakarta Selatan</p>
+            <a href="#" class="btn-gold-outline">LIHAT MAPS</a>
+        </div>
+
+        <div class="card-elegant">
+            <p style="font-size: 10px; letter-spacing: 3px; margin-bottom: 15px;">MENGHITUNG HARI</p>
+            <div class="timer">
+                <div><span id="d">0</span><label>Hari</label></div>
+                <div><span id="h">0</span><label>Jam</label></div>
+                <div><span id="m">0</span><label>Menit</label></div>
+            </div>
+        </div>
+
+        <div class="card-elegant" style="background: #d4af37; color: #000;">
+            <h3 style="font-family: 'Playfair Display';">Konfirmasi Kehadiran</h3>
+            <p style="font-size: 13px; margin: 10px 0;">Kehadiran Anda adalah kebahagiaan bagi kami.</p>
+            <a href="https://wa.me/628123456789" style="display:inline-block; background:#000; color:#fff; padding:10px 30px; border-radius:50px; text-decoration:none; font-weight:bold; margin-top:10px;">RSVP VIA WA</a>
+        </div>
+        
+        <div style="height: 80px;"></div>
     </div>
 
 <script>
-    // Countdown Timer
-    const weddingDate = new Date("Feb 14, 2026 09:00:00").getTime();
+    // Timer
+    const target = new Date("Feb 14, 2026 09:00:00").getTime();
     setInterval(() => {
         const now = new Date().getTime();
-        const diff = weddingDate - now;
+        const diff = target - now;
         document.getElementById('d').innerText = Math.floor(diff / 86400000);
         document.getElementById('h').innerText = Math.floor((diff % 86400000) / 3600000);
         document.getElementById('m').innerText = Math.floor((diff % 3600000) / 60000);
     }, 1000);
 
-    // Copy Rekening Function
-    function copyNorek() {
-        const norek = document.getElementById('norek').innerText;
-        navigator.clipboard.writeText(norek);
-        alert("Nomor rekening berhasil disalin!");
-    }
-
-    // Start App Function
     function startApp() {
-        const overlay = document.getElementById('overlay');
-        overlay.classList.add('fade-out'); // Efek fade out
-
-        setTimeout(() => {
-            overlay.style.display = 'none';
-            document.getElementById('mainContent').style.display = 'block';
-        }, 1500); // Durasi fade out
-
-        const audio = document.getElementById('bgm');
-        audio.play().catch(e => {
-            console.log("Autoplay dicegah browser, perlu interaksi pengguna.");
-        });
+        document.getElementById('overlay').style.display = 'none';
+        document.getElementById('mainContent').style.display = 'block';
+        document.getElementById('bgm').play();
     }
 </script>
 </body>
