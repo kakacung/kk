@@ -10,91 +10,88 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body { 
-            background: #0a0a0a; /* Hitam Pekat Elegan */
-            color: #d4af37; /* Emas */
+            background: #0a0a0a; 
+            color: #d4af37; 
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
         }
 
-        /* Ornamen Bunga Emas di Pojok (Persis Gambar) */
-        .floral-ornament {
-            position: fixed; width: 150px; z-index: 1; opacity: 0.6;
+        /* Ornamen Emas Pojok */
+        .floral {
+            position: fixed; width: 180px; z-index: 1; opacity: 0.5;
             pointer-events: none;
         }
-        .top-right { top: -20px; right: -20px; transform: rotate(180deg); }
-        .bottom-left { bottom: -20px; left: -20px; }
+        .top-right { top: -30px; right: -30px; transform: rotate(180deg); }
+        .bottom-left { bottom: -30px; left: -30px; }
 
-        /* Overlay Awal */
+        /* Overlay */
         #overlay {
             position: fixed; inset: 0; background: #0a0a0a; z-index: 10000;
             display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
         }
 
         .btn-open {
-            background: #d4af37; color: #000; border: none; padding: 12px 35px;
+            background: #d4af37; color: #000; border: none; padding: 12px 40px;
             border-radius: 50px; font-weight: bold; cursor: pointer; margin-top: 30px;
-            text-transform: uppercase; letter-spacing: 2px; transition: 0.3s;
+            text-transform: uppercase; letter-spacing: 2px;
         }
 
-        /* Hero Section */
-        .section { padding: 60px 20px; text-align: center; position: relative; z-index: 2; }
+        /* Hero */
+        .hero { padding: 60px 20px; text-align: center; position: relative; z-index: 2; }
         
-        .main-img-wrapper {
-            position: relative; width: 80vw; max-width: 320px; margin: 0 auto;
+        .img-3d-frame {
+            position: relative; width: 85vw; max-width: 320px; margin: 0 auto;
             perspective: 1000px;
         }
         
         .main-photo {
             width: 100%; border-radius: 15px; border: 2px solid #d4af37;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.8);
-            transform: rotateY(-5deg) rotateX(5deg); /* Efek 3D */
+            box-shadow: 0 20px 40px rgba(0,0,0,0.9);
+            transform: rotateY(-7deg) rotateX(5deg);
         }
 
         .couple-name { 
-            font-family: 'Sacramento', cursive; font-size: 3.5rem; 
+            font-family: 'Sacramento', cursive; font-size: 3.8rem; 
             color: #d4af37; margin: 25px 0; 
         }
 
-        /* Card Elegan (Glassmorphism Dark) */
-        .card-elegant {
-            background: rgba(20, 20, 20, 0.8);
-            border: 1px solid #d4af37; border-radius: 15px;
-            padding: 30px 20px; margin: 20px auto;
-            width: 90vw; max-width: 380px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .btn-gold-outline {
-            display: inline-block; border: 1px solid #d4af37; color: #d4af37;
-            padding: 10px 25px; border-radius: 50px; text-decoration: none;
-            font-size: 13px; margin-top: 15px; transition: 0.3s;
-        }
-        .btn-gold-outline:hover { background: #d4af37; color: #000; }
-
-        /* Grid Galeri */
+        /* Grid Foto */
         .gallery {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-            padding: 15px; max-width: 400px; margin: 0 auto;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+            padding: 20px; max-width: 420px; margin: 0 auto;
         }
         .gallery img {
             width: 100%; aspect-ratio: 1/1; object-fit: cover;
             border-radius: 10px; border: 1px solid #d4af37;
         }
 
-        .timer { display: flex; justify-content: center; gap: 15px; margin-top: 15px; }
-        .timer div { text-align: center; border: 1px solid #d4af37; padding: 10px; border-radius: 10px; min-width: 65px; }
-        .timer span { display: block; font-size: 20px; font-weight: bold; }
-        .timer label { font-size: 9px; text-transform: uppercase; color: #aaa; }
+        /* Card Info */
+        .glass-card {
+            background: rgba(25, 25, 25, 0.9);
+            border: 1px solid #d4af37; border-radius: 20px;
+            padding: 35px 25px; margin: 25px auto;
+            width: 92vw; max-width: 380px; text-align: center;
+        }
+
+        .timer { display: flex; justify-content: center; gap: 12px; margin-top: 20px; }
+        .timer div { border: 1px solid #d4af37; padding: 10px; border-radius: 12px; min-width: 70px; }
+        .timer span { display: block; font-size: 22px; font-weight: bold; color: #d4af37; }
+
+        .btn-wa {
+            display: inline-block; background: #d4af37; color: #000;
+            padding: 13px 30px; border-radius: 50px; text-decoration: none;
+            font-weight: bold; margin-top: 20px; width: 100%;
+        }
     </style>
 </head>
 <body>
 
-    <img src="https://www.transparentpng.com/download/floral/wedding-invitation-floral-frame-free-png-G6XlF6.png" class="floral-ornament top-right">
-    <img src="https://www.transparentpng.com/download/floral/wedding-invitation-floral-frame-free-png-G6XlF6.png" class="floral-ornament bottom-left">
+    <img src="https://www.transparentpng.com/download/floral/wedding-invitation-floral-frame-free-png-G6XlF6.png" class="floral top-right">
+    <img src="https://www.transparentpng.com/download/floral/wedding-invitation-floral-frame-free-png-G6XlF6.png" class="floral bottom-left">
 
     <div id="overlay">
-        <p style="letter-spacing: 5px; font-size: 12px;">THE WEDDING OF</p>
-        <h1 style="font-family: 'Sacramento'; font-size: 3rem; color: #d4af37; margin: 15px 0;">Romeo & Juliet</h1>
-        <p style="font-size: 13px; color: #888;">Yth. Tamu Undangan</p>
+        <p style="letter-spacing: 6px; font-size: 11px;">THE WEDDING OF</p>
+        <h1 style="font-family: 'Sacramento'; font-size: 3.5rem; color: #d4af37; margin: 20px 0;">Romeo & Juliet</h1>
         <button class="btn-open" onclick="startApp()">Buka Undangan</button>
     </div>
 
@@ -103,12 +100,12 @@
     </audio>
 
     <div id="mainContent" style="display:none;">
-        <div class="section">
-            <div class="main-img-wrapper">
+        <div class="hero">
+            <div class="img-3d-frame">
                 <img src="AI (6).jpg" class="main-photo">
             </div>
             <h1 class="couple-name">Romeo & Juliet</h1>
-            <p style="letter-spacing: 3px; font-size: 12px; color: #aaa;">SABTU, 14 FEBRUARI 2026</p>
+            <p style="letter-spacing: 4px; font-size: 13px; color: #aaa;">14 FEBRUARI 2026</p>
         </div>
 
         <div class="gallery">
@@ -118,37 +115,32 @@
             <img src="AI (71).jpg">
         </div>
 
-        <div class="card-elegant">
-            <h3 style="font-family: 'Playfair Display'; italic; letter-spacing: 2px;">Detail Acara</h3>
-            <div style="height: 1px; background: #d4af37; width: 50px; margin: 15px auto;"></div>
-            <p style="font-weight: 600;">AKAD NIKAH</p>
-            <p style="font-size: 14px; color: #ccc;">09.00 - 10.00 WIB</p>
-            <p style="margin-top: 15px; font-weight: 600;">RESEPSI</p>
-            <p style="font-size: 14px; color: #ccc;">11.00 - Selesai</p>
-            <p style="margin-top: 15px; font-size: 14px;">Gedung Agung Digital<br>Jakarta Selatan</p>
-            <a href="#" class="btn-gold-outline">LIHAT MAPS</a>
+        <div class="glass-card">
+            <h3 style="font-family: 'Playfair Display'; font-style: italic; font-size: 1.5rem;">Save The Date</h3>
+            <p style="margin-top: 15px; font-weight: 600;">AKAD & RESEPSI</p>
+            <p style="font-size: 14px; color: #bbb;">Sabtu, 14 Februari 2026</p>
+            <p style="margin-top: 10px; font-size: 14px;">Gedung Agung Digital, Jakarta</p>
         </div>
 
-        <div class="card-elegant">
-            <p style="font-size: 10px; letter-spacing: 3px; margin-bottom: 15px;">MENGHITUNG HARI</p>
+        <div class="glass-card">
+            <p style="font-size: 11px; letter-spacing: 3px;">COUNTDOWN</p>
             <div class="timer">
-                <div><span id="d">0</span><label>Hari</label></div>
-                <div><span id="h">0</span><label>Jam</label></div>
-                <div><span id="m">0</span><label>Menit</label></div>
+                <div><span id="d">0</span><label>HARI</label></div>
+                <div><span id="h">0</span><label>JAM</label></div>
+                <div><span id="m">0</span><label>MENIT</label></div>
             </div>
         </div>
 
-        <div class="card-elegant" style="background: #d4af37; color: #000;">
+        <div class="glass-card">
             <h3 style="font-family: 'Playfair Display';">Konfirmasi Kehadiran</h3>
-            <p style="font-size: 13px; margin: 10px 0;">Kehadiran Anda adalah kebahagiaan bagi kami.</p>
-            <a href="https://wa.me/628123456789" style="display:inline-block; background:#000; color:#fff; padding:10px 30px; border-radius:50px; text-decoration:none; font-weight:bold; margin-top:10px;">RSVP VIA WA</a>
+            <a href="https://wa.me/628123456789" class="btn-wa">RSVP VIA WHATSAPP</a>
         </div>
         
-        <div style="height: 80px;"></div>
+        <div style="height: 100px;"></div>
     </div>
 
 <script>
-    // Timer
+    // Timer Logic
     const target = new Date("Feb 14, 2026 09:00:00").getTime();
     setInterval(() => {
         const now = new Date().getTime();
@@ -161,7 +153,7 @@
     function startApp() {
         document.getElementById('overlay').style.display = 'none';
         document.getElementById('mainContent').style.display = 'block';
-        document.getElementById('bgm').play();
+        document.getElementById('bgm').play().catch(e => console.log("Play blocked"));
     }
 </script>
 </body>
