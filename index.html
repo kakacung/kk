@@ -3,40 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Undangan Pernikahan Digital</title>
+    <title>Our Holy Matrimony</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;700&display=swap');
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: #fffcf5; color: #4a4a4a; font-family: 'Montserrat', sans-serif; line-height: 1.6; overflow-x: hidden; }
+        body { background: #fffcf5; color: #4a4a4a; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
 
         /* Overlay Awal */
         #overlay {
             position: fixed; inset: 0; background: #fffcf5; z-index: 9999;
-            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
         }
 
         .btn-open {
             background: #c5a059; color: #fff; border: none; padding: 15px 40px;
-            border-radius: 30px; font-weight: bold; cursor: pointer; margin-top: 25px;
+            border-radius: 30px; font-weight: bold; cursor: pointer; margin-top: 20px;
             box-shadow: 0 4px 15px rgba(197, 160, 89, 0.4);
         }
 
-        /* Content Section */
-        .container { display: none; width: 100%; flex-direction: column; align-items: center; }
-        .section { padding: 40px 20px; text-align: center; width: 100%; }
-        
-        .hero-img { 
-            width: 85vw; height: 110vw; max-width: 350px; 
+        /* Foto Utama Atas */
+        .hero { padding: 40px 15px; text-align: center; }
+        .main-photo {
+            width: 100%; max-width: 400px; border-radius: 15px;
             border: 8px solid #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            object-fit: cover; border-radius: 15px;
         }
 
-        .couple-name { font-family: 'Great Vibes', cursive; font-size: 3rem; color: #c5a059; margin: 20px 0; }
-        
+        /* Grid 4 Foto di Bawah */
+        .photo-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+            padding: 0 15px; max-width: 400px; margin: 20px auto;
+        }
+        .photo-grid img {
+            width: 100%; aspect-ratio: 1/1; object-fit: cover;
+            border-radius: 10px; border: 4px solid #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .couple-name { font-family: 'Great Vibes', cursive; font-size: 3rem; color: #c5a059; margin: 25px 0; text-align: center; }
+
         .card { 
             background: #fff; padding: 25px; border-radius: 15px; width: 90vw; max-width: 380px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05); margin: 0 auto 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05); margin: 20px auto; text-align: center;
         }
 
         .btn-action {
@@ -45,110 +53,94 @@
             font-weight: bold; margin-top: 15px; font-size: 14px;
         }
 
-        #aiVoiceText { font-style: italic; font-size: 14px; color: #666; margin: 15px 0; min-height: 40px; }
-
-        /* Timer */
-        .timer { display: flex; justify-content: center; gap: 10px; margin-top: 15px; }
-        .timer div { background: #c5a059; color: #fff; padding: 10px; border-radius: 8px; min-width: 65px; }
-        .timer span { display: block; font-size: 18px; font-weight: bold; }
-        .timer label { font-size: 9px; text-transform: uppercase; }
+        .timer { display: flex; justify-content: center; gap: 8px; margin-top: 15px; }
+        .timer div { background: #c5a059; color: #fff; padding: 8px; border-radius: 8px; min-width: 60px; }
     </style>
 </head>
 <body>
 
     <div id="overlay">
-        <p style="letter-spacing: 3px; font-size: 12px; color: #c5a059;">THE WEDDING OF</p>
-        <h1 style="font-family: 'Great Vibes'; font-size: 2.8rem; color: #c5a059; margin: 10px 0;">Romeo & Juliet</h1>
-        <p style="margin-top: 20px; font-size: 13px;">Kepada Yth Bapak/Ibu:</p>
-        <h2 id="guestTarget" style="font-weight: 700; margin: 5px 0;">PRESIDEN RI</h2>
-        <button class="btn-open" onclick="bukaUndangan()">BUKA UNDANGAN</button>
+        <p style="letter-spacing: 3px; font-size: 10px;">WEDDING INVITATION</p>
+        <h1 style="font-family: 'Great Vibes'; font-size: 2.5rem; color: #c5a059;">Romeo & Juliet</h1>
+        <p style="margin-top: 20px; font-size: 12px;">Yth. Bapak/Ibu:</p>
+        <h2 id="guestTarget">PRESIDEN RI</h2>
+        <button class="btn-open" onclick="startApp()">BUKA UNDANGAN</button>
     </div>
 
-    <audio id="music" loop>
+    <audio id="bgm" loop>
         <source src="08 #1.mp3" type="audio/mpeg">
     </audio>
 
-    <div class="container" id="mainContent">
-        <section class="section">
-            <img src="AI (6).jpg" class="hero-img">
+    <div id="mainContent" style="display:none;">
+        <div class="hero">
+            <img src="AI (6).jpg" class="main-photo" alt="Main Photo">
             <h1 class="couple-name">Romeo & Juliet</h1>
-            <p style="font-size: 14px; color: #888;">"Menyatukan dua hati dalam satu cinta suci"</p>
-        </section>
+        </div>
 
-        <section class="section" style="background: #fdf8ef;">
-            <div class="card">
-                <p style="font-size: 12px; font-weight: bold; letter-spacing: 2px;">COUNTDOWN</p>
-                <div class="timer">
-                    <div><span id="days">0</span><label>Hari</label></div>
-                    <div><span id="hours">0</span><label>Jam</label></div>
-                    <div><span id="mins">0</span><label>Menit</label></div>
-                </div>
-            </div>
+        <div class="photo-grid">
+            <img src="AI (71).jpg">
+            <img src="AI (80).jpg">
+            <img src="AI (6).jpg"> <img src="AI (71).jpg"> </div>
 
-            <div class="card">
-                <h3 style="color: #c5a059; margin-bottom: 15px;">AKAD & RESEPSI</h3>
-                <p><strong>Sabtu, 14 Februari 2026</strong></p>
-                <p>09.00 - Selesai</p>
-                <p style="margin-top: 10px; font-size: 14px;">Gedung Agung Istana Digital<br>Jakarta Selatan</p>
-                <a href="#" class="btn-action">BUKA GOOGLE MAPS</a>
+        <div class="card">
+            <p style="font-size: 12px; font-weight: bold; letter-spacing: 2px;">COUNTDOWN</p>
+            <div class="timer">
+                <div><span id="d">0</span><label>Hari</label></div>
+                <div><span id="h">0</span><label>Jam</label></div>
+                <div><span id="m">0</span><label>Menit</label></div>
             </div>
+        </div>
 
-            <div class="card">
-                <h3 id="guestNameDisplay" style="color: #c5a059;">PRESIDEN RI</h3>
-                <p id="aiVoiceText">Menyambungkan ke Protokol AI...</p>
-                <a href="https://wa.me/628123456789?text=Halo,%20saya%20akan%20hadir" class="btn-action" style="background: #25d366;">KONFIRMASI (RSVP)</a>
-            </div>
-        </section>
+        <div class="card">
+            <h3 id="guestNameDisplay">PRESIDEN RI</h3>
+            <p id="aiStatus" style="font-style: italic; color: #888; font-size: 14px; margin-top: 10px;">Menghubungkan AI...</p>
+            <a href="https://wa.me/628123456789" class="btn-action" style="background: #25d366;">RSVP VIA WHATSAPP</a>
+        </div>
+        
+        <div style="height: 50px;"></div>
     </div>
 
 <script>
-    // Timer Sederhana
+    // Timer
     const target = new Date("Feb 14, 2026 09:00:00").getTime();
     setInterval(() => {
         const now = new Date().getTime();
-        const d = target - now;
-        document.getElementById('days').innerText = Math.floor(d / (1000 * 60 * 60 * 24));
-        document.getElementById('hours').innerText = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        document.getElementById('mins').innerText = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60));
+        const diff = target - now;
+        document.getElementById('d').innerText = Math.floor(diff / 86400000);
+        document.getElementById('h').innerText = Math.floor((diff % 86400000) / 3600000);
+        document.getElementById('m').innerText = Math.floor((diff % 3600000) / 60000);
     }, 1000);
 
-    async function bukaUndangan() {
+    async function startApp() {
         document.getElementById('overlay').style.display = 'none';
-        document.getElementById('mainContent').style.display = 'flex';
-        document.getElementById('music').play();
+        document.getElementById('mainContent').style.display = 'block';
+        
+        const music = document.getElementById('bgm');
+        music.play().catch(e => console.log("Music blocked"));
 
         const guest = document.getElementById('guestNameDisplay').innerText;
-        const textDisplay = document.getElementById('aiVoiceText');
-
-        // Teks cadangan kalau AI error
-        const fallbackText = `Selamat datang Yang Mulia ${guest}. Merupakan suatu kehormatan besar bagi kami jika Anda dapat hadir di hari bahagia pernikahan kami.`;
+        const status = document.getElementById('aiStatus');
+        const fallback = `Selamat datang Yang Mulia ${guest}. Suatu kehormatan besar bagi kami atas kehadiran Anda.`;
 
         try {
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 5000); // Batasi nunggu 5 detik aja
-
-            const res = await fetch(`https://text.pollinations.ai/${encodeURIComponent("Buat 1 kalimat singkat undangan nikah sopan untuk " + guest)}`, { signal: controller.signal });
-            
-            if (!res.ok) throw new Error(); // Jika 502, lari ke catch
-
+            const res = await fetch(`https://text.pollinations.ai/${encodeURIComponent("Sapa tamu " + guest + " dengan sangat sopan untuk hadir di pernikahan kami")}`);
+            if(!res.ok) throw new Error();
             const text = await res.text();
-            textDisplay.innerText = text;
-            mulaiBicara(text);
+            status.innerText = text;
+            speak(text);
         } catch(e) {
-            // Kalau server down (502), pakai teks ini:
-            textDisplay.innerText = fallbackText;
-            mulaiBicara(fallbackText);
+            status.innerText = fallback;
+            speak(fallback);
         }
     }
 
-    function mulaiBicara(teks) {
+    function speak(t) {
         window.speechSynthesis.cancel();
-        const speech = new SpeechSynthesisUtterance(teks);
-        speech.lang = 'id-ID';
-        speech.rate = 0.9;
-        window.speechSynthesis.speak(speech);
+        const s = new SpeechSynthesisUtterance(t);
+        s.lang = 'id-ID';
+        s.rate = 0.9;
+        window.speechSynthesis.speak(s);
     }
 </script>
 </body>
 </html>
-
