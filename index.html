@@ -8,74 +8,76 @@
         @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;700&display=swap');
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: #fffcf5; color: #4a4a4a; font-family: 'Montserrat', sans-serif; line-height: 1.6; }
+        body { background: #fffcf5; color: #4a4a4a; font-family: 'Montserrat', sans-serif; line-height: 1.6; overflow-x: hidden; }
 
-        /* Overlay */
+        /* Overlay Awal */
         #overlay {
             position: fixed; inset: 0; background: #fffcf5; z-index: 9999;
-            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px;
         }
 
         .btn-open {
-            background: #c5a059; color: #fff; border: none; padding: 12px 30px;
-            border-radius: 25px; font-weight: bold; cursor: pointer; margin-top: 20px;
+            background: #c5a059; color: #fff; border: none; padding: 15px 40px;
+            border-radius: 30px; font-weight: bold; cursor: pointer; margin-top: 25px;
+            box-shadow: 0 4px 15px rgba(197, 160, 89, 0.4);
         }
 
-        /* Hero Section */
-        .section { padding: 60px 20px; text-align: center; width: 100%; }
+        /* Content Section */
+        .container { display: none; width: 100%; flex-direction: column; align-items: center; }
+        .section { padding: 40px 20px; text-align: center; width: 100%; }
+        
         .hero-img { 
             width: 85vw; height: 110vw; max-width: 350px; 
-            border: 10px solid #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            object-fit: cover; border-radius: 10px;
+            border: 8px solid #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            object-fit: cover; border-radius: 15px;
         }
 
         .couple-name { font-family: 'Great Vibes', cursive; font-size: 3rem; color: #c5a059; margin: 20px 0; }
         
-        /* RSVP & Box */
         .card { 
-            background: #fff; padding: 25px; border-radius: 15px; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 30px;
+            background: #fff; padding: 25px; border-radius: 15px; width: 90vw; max-width: 380px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05); margin: 0 auto 30px;
         }
 
-        .btn-wa {
-            display: inline-block; background: #25d366; color: white; 
+        .btn-action {
+            display: inline-block; background: #c5a059; color: white; 
             padding: 12px 25px; border-radius: 25px; text-decoration: none;
             font-weight: bold; margin-top: 15px; font-size: 14px;
         }
 
-        #aiVoiceText { font-style: italic; font-size: 14px; color: #777; margin: 15px 0; }
+        #aiVoiceText { font-style: italic; font-size: 14px; color: #666; margin: 15px 0; min-height: 40px; }
 
-        /* Countdown */
-        .timer { display: flex; justify-content: center; gap: 10px; margin: 20px 0; }
-        .timer div { background: #c5a059; color: #fff; padding: 10px; border-radius: 8px; min-width: 60px; }
+        /* Timer */
+        .timer { display: flex; justify-content: center; gap: 10px; margin-top: 15px; }
+        .timer div { background: #c5a059; color: #fff; padding: 10px; border-radius: 8px; min-width: 65px; }
         .timer span { display: block; font-size: 18px; font-weight: bold; }
-        .timer label { font-size: 10px; text-transform: uppercase; }
+        .timer label { font-size: 9px; text-transform: uppercase; }
     </style>
 </head>
 <body>
 
     <div id="overlay">
-        <h2 style="font-size: 14px; letter-spacing: 3px;">THE WEDDING OF</h2>
-        <h1 style="font-family: 'Great Vibes'; font-size: 2.5rem; color: #c5a059; margin: 10px 0;">Romeo & Juliet</h1>
-        <p style="font-size: 12px;">Kepada Yth:</p>
-        <h3 id="guestTarget">Tamu Kehormatan</h3>
-        <button class="btn-open" onclick="bukaUndangan()">Buka Undangan</button>
+        <p style="letter-spacing: 3px; font-size: 12px; color: #c5a059;">THE WEDDING OF</p>
+        <h1 style="font-family: 'Great Vibes'; font-size: 2.8rem; color: #c5a059; margin: 10px 0;">Romeo & Juliet</h1>
+        <p style="margin-top: 20px; font-size: 13px;">Kepada Yth Bapak/Ibu:</p>
+        <h2 id="guestTarget" style="font-weight: 700; margin: 5px 0;">PRESIDEN RI</h2>
+        <button class="btn-open" onclick="bukaUndangan()">BUKA UNDANGAN</button>
     </div>
 
     <audio id="music" loop>
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
     </audio>
 
-    <div id="mainContent" style="display:none;">
+    <div class="container" id="mainContent">
         <section class="section">
             <img src="https://github.com/USERNAME_LO.png" class="hero-img">
             <h1 class="couple-name">Romeo & Juliet</h1>
-            <p>“Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri...”</p>
+            <p style="font-size: 14px; color: #888;">"Menyatukan dua hati dalam satu cinta suci"</p>
         </section>
 
         <section class="section" style="background: #fdf8ef;">
             <div class="card">
-                <h3 style="font-family: 'Montserrat'; letter-spacing: 2px;">MENANTI HARI BAHAGIA</h3>
+                <p style="font-size: 12px; font-weight: bold; letter-spacing: 2px;">COUNTDOWN</p>
                 <div class="timer">
                     <div><span id="days">0</span><label>Hari</label></div>
                     <div><span id="hours">0</span><label>Jam</label></div>
@@ -84,51 +86,67 @@
             </div>
 
             <div class="card">
-                <h2 style="color: #c5a059;">AKAD & RESEPSI</h2>
-                <div style="height: 1px; background: #c5a059; width: 50%; margin: 15px auto;"></div>
+                <h3 style="color: #c5a059; margin-bottom: 15px;">AKAD & RESEPSI</h3>
                 <p><strong>Sabtu, 14 Februari 2026</strong></p>
-                <p>Pukul 09.00 - Selesai</p>
-                <p style="margin-top: 10px;">Gedung Agung Istana Digital<br>Jakarta Selatan</p>
-                <a href="https://maps.google.com" target="_blank" class="btn-wa" style="background: #c5a059;">LIHAT LOKASI MAPS</a>
+                <p>09.00 - Selesai</p>
+                <p style="margin-top: 10px; font-size: 14px;">Gedung Agung Istana Digital<br>Jakarta Selatan</p>
+                <a href="#" class="btn-action">BUKA GOOGLE MAPS</a>
             </div>
 
             <div class="card">
-                <h3 id="guestNameDisplay">PRESIDEN RI</h3>
-                <p id="aiVoiceText">Memuat sambutan hangat...</p>
-                <a href="https://wa.me/628123456789?text=Halo%20saya%20akan%20datang" class="btn-wa">KONFIRMASI KEHADIRAN (RSVP)</a>
+                <h3 id="guestNameDisplay" style="color: #c5a059;">PRESIDEN RI</h3>
+                <p id="aiVoiceText">Menyambungkan ke Protokol AI...</p>
+                <a href="https://wa.me/628123456789?text=Halo,%20saya%20akan%20hadir" class="btn-action" style="background: #25d366;">KONFIRMASI (RSVP)</a>
             </div>
         </section>
     </div>
 
 <script>
-    // Countdown Timer
-    const targetDate = new Date("Feb 14, 2026 09:00:00").getTime();
+    // Timer Sederhana
+    const target = new Date("Feb 14, 2026 09:00:00").getTime();
     setInterval(() => {
         const now = new Date().getTime();
-        const diff = targetDate - now;
-        document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-        document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        document.getElementById('mins').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const d = target - now;
+        document.getElementById('days').innerText = Math.floor(d / (1000 * 60 * 60 * 24));
+        document.getElementById('hours').innerText = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        document.getElementById('mins').innerText = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60));
     }, 1000);
 
     async function bukaUndangan() {
         document.getElementById('overlay').style.display = 'none';
-        document.getElementById('mainContent').style.display = 'block';
+        document.getElementById('mainContent').style.display = 'flex';
         document.getElementById('music').play();
 
         const guest = document.getElementById('guestNameDisplay').innerText;
         const textDisplay = document.getElementById('aiVoiceText');
 
+        // Teks cadangan kalau AI error
+        const fallbackText = `Selamat datang Yang Mulia ${guest}. Merupakan suatu kehormatan besar bagi kami jika Anda dapat hadir di hari bahagia pernikahan kami.`;
+
         try {
-            const prompt = encodeURIComponent(`Buat ucapan singkat pernikahan sangat sopan untuk ${guest} agar hadir di pernikahan Romeo dan Juliet.`);
-            const res = await fetch(`https://text.pollinations.ai/${prompt}`);
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 5000); // Batasi nunggu 5 detik aja
+
+            const res = await fetch(`https://text.pollinations.ai/${encodeURIComponent("Buat 1 kalimat singkat undangan nikah sopan untuk " + guest)}`, { signal: controller.signal });
+            
+            if (!res.ok) throw new Error(); // Jika 502, lari ke catch
+
             const text = await res.text();
             textDisplay.innerText = text;
+            mulaiBicara(text);
+        } catch(e) {
+            // Kalau server down (502), pakai teks ini:
+            textDisplay.innerText = fallbackText;
+            mulaiBicara(fallbackText);
+        }
+    }
 
-            const speech = new SpeechSynthesisUtterance(text);
-            speech.lang = 'id-ID';
-            window.speechSynthesis.speak(speech);
-        } catch(e) { textDisplay.innerText = "Kehadiran Anda adalah kehormatan bagi kami."; }
+    function mulaiBicara(teks) {
+        window.speechSynthesis.cancel();
+        const speech = new SpeechSynthesisUtterance(teks);
+        speech.lang = 'id-ID';
+        speech.rate = 0.9;
+        window.speechSynthesis.speak(speech);
     }
 </script>
 </body>
