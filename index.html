@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>The Wedding of Romeo & Juliet</title>
     
-    <!-- Script HLS.js untuk Video -->
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     
     <style>
@@ -40,50 +39,76 @@
             text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
         }
 
-        /* Hero */
-        .hero { padding: 60px 20px; text-align: center; position: relative; z-index: 2; }
-        
-        .img-3d-frame {
-            position: relative; width: 85vw; max-width: 320px; margin: 0 auto;
-            perspective: 1000px;
+        /* --- HERO (FOTO UTAMA) --- */
+        /* Diubah agar ukurannya SAMA PERSIS dengan Video (Full Screen) */
+        .hero { 
+            position: relative; 
+            width: 100vw; 
+            height: 100vh; /* Tinggi Full Layar */
+            overflow: hidden; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Teks di tengah */
+            align-items: center;
+            z-index: 2;
         }
-        
-        .main-photo {
-            width: 100%; border-radius: 15px; border: 2px solid #d4af37;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.9);
-            transform: rotateY(-7deg) rotateX(5deg);
+
+        /* Gambar dijadikan background full screen */
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Foto penuh layar (mungkin terpotong sedikit samping) */
+            z-index: -1; /* Di belakang teks */
+            filter: brightness(0.6); /* Gelapkan gambar biar teks terbaca */
         }
 
         .couple-name { 
-            font-family: 'Sacramento', cursive; font-size: 3.8rem; 
-            color: #d4af37; margin: 25px 0; 
+            font-family: 'Sacramento', cursive; font-size: 4.5rem; 
+            color: #d4af37; margin: 10px 0; text-shadow: 2px 2px 4px #000;
+        }
+        
+        .hero p {
+            color: #fff; text-shadow: 1px 1px 2px #000; font-weight: 600; letter-spacing: 2px;
         }
 
-        /* Style Video */
+        /* --- GALLERY FULL SCREEN --- */
+        .gallery {
+            display: block; 
+            width: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .gallery img {
+            width: 100vw; /* Lebar Full Layar */
+            height: 100vh; /* Tinggi Full Layar */
+            object-fit: cover; /* Foto penuh layar */
+            border: none;
+            border-radius: 0;
+            margin: 0;
+            display: block;
+        }
+
+        /* --- VIDEO FULL SCREEN (PALING BAWAH) --- */
         #video-wrapper {
-            width: 90vw; max-width: 500px; height: 280px;
-            margin: 30px auto;
-            border: 2px solid #d4af37;
-            border-radius: 15px;
+            width: 100vw; 
+            height: 100vh; 
+            margin: 0;
+            border-radius: 0; 
+            border: none; 
             overflow: hidden;
             background: #000;
             position: relative;
             z-index: 5;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         
         #video-wrapper video {
-            width: 100%; height: 100%; object-fit: cover;
-        }
-
-        /* Gallery Grid */
-        .gallery {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
-            padding: 20px; max-width: 420px; margin: 0 auto;
-        }
-        .gallery img {
-            width: 100%; aspect-ratio: 1/1; object-fit: cover;
-            border-radius: 10px; border: 1px solid #d4af37;
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover;
         }
 
         /* Card Informasi */
@@ -125,19 +150,17 @@
     </audio>
 
     <div id="mainContent" style="display:none;">
+        
+        <!-- 1. HERO FULL SCREEN (SAMA UKURAN DENGAN VIDEO) -->
         <div class="hero">
-            <div class="img-3d-frame">
-                <img src="AI (6).jpg" class="main-photo">
-            </div>
+            <!-- Gambar Background Full Screen -->
+            <img src="AI (6).jpg" class="hero-bg">
+            
             <h1 class="couple-name">Romeo & Juliet</h1>
-            <p style="letter-spacing: 4px; font-size: 13px; color: #aaa;">14 FEBRUARI 2026</p>
+            <p style="letter-spacing: 4px; font-size: 18px;">14 FEBRUARI 2026</p>
         </div>
 
-        <!-- VIDEO -->
-        <div id="video-wrapper">
-            <video id="video" autoplay muted controls playsinline></video>
-        </div>
-
+        <!-- 2. GALLERY FULL SCREEN (SAMA UKURAN DENGAN VIDEO) -->
         <div class="gallery">
             <img src="AI (71).jpg">
             <img src="AI (80).jpg">
@@ -145,6 +168,7 @@
             <img src="AI (71).jpg">
         </div>
 
+        <!-- 3. CARD INFORMASI (UKURAN NORMAL) -->
         <div class="glass-card">
             <h3 style="font-family: 'Playfair Display'; font-style: italic; font-size: 1.5rem;">Save The Date</h3>
             <div style="height: 1px; background: #d4af37; width: 60px; margin: 15px auto;"></div>
@@ -166,8 +190,13 @@
             <h3 style="font-family: 'Playfair Display';">Konfirmasi Kehadiran</h3>
             <a href="https://wa.me/628123456789?text=Saya%20akan%20datang" class="btn-wa">RSVP VIA WHATSAPP</a>
         </div>
+
+        <!-- 4. VIDEO FULL SCREEN (PALING BAWAH) -->
+        <div id="video-wrapper">
+            <video id="video" autoplay muted controls playsinline></video>
+        </div>
         
-        <div style="height: 100px;"></div>
+        <div style="height: 50px;"></div>
     </div>
 
 <script>
