@@ -119,9 +119,9 @@
         <button class="btn-open" onclick="startApp()">Buka Undangan</button>
     </div>
 
-    <!-- MUSIK ONLINE (Canon in D dari Internet Archive) -->
+    <!-- MUSIK JAMRUD -->
     <audio id="bgm" loop preload="auto">
-        <source src="https://archive.org/download/Pachelbel_Canon_In_D_Major/Pachelbel_Canon_In_D_Major.mp3" type="audio/mpeg">
+        <source src="https://archive.org/download/JamrudFullAlbumTerimaKasih/Jamrud Full Album Terima Kasih 1998.mp3" type="audio/mpeg">
     </audio>
 
     <div id="mainContent" style="display:none;">
@@ -186,7 +186,7 @@
         document.getElementById('mainContent').style.display = 'block';
         
         const music = document.getElementById('bgm');
-        music.play().catch(e => console.log("Lagu butuh klik manual"));
+        music.play().catch(e => console.log("Musik butuh interaksi user"));
         
         // Mulai Video
         playVideo(0);
