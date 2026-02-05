@@ -19,9 +19,9 @@
             overflow-x: hidden;
         }
 
-        /* Ornamen Emas Pojok */
+        /* Ornamen Emas */
         .floral {
-            position: fixed; width: 180px; z-index: 1; opacity: 0.5;
+            position: fixed; width: 180px; z-index: 1; opacity: 0.4;
             pointer-events: none;
         }
         .top-right { top: -30px; right: -30px; transform: rotate(180deg); }
@@ -39,32 +39,30 @@
             text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
         }
 
-        /* Hero (Foto Pertama) */
-        .hero { padding: 60px 20px; text-align: center; position: relative; z-index: 2; }
+        /* Hero (Foto Utama) */
+        .hero { padding: 40px 20px; text-align: center; position: relative; z-index: 2; }
         
         .img-3d-frame {
-            position: relative; width: 85vw; max-width: 320px; margin: 0 auto;
+            position: relative; width: 80vw; max-width: 300px; margin: 0 auto;
             perspective: 1000px;
         }
         
         .main-photo {
             width: 100%; border-radius: 15px; border: 2px solid #d4af37;
             box-shadow: 0 20px 40px rgba(0,0,0,0.9);
-            transform: rotateY(-7deg) rotateX(5deg);
+            transform: rotateY(-5deg) rotateX(5deg);
         }
 
         .couple-name { 
-            font-family: 'Sacramento', cursive; font-size: 3.8rem; 
-            color: #d4af37; margin: 25px 0; 
+            font-family: 'Sacramento', cursive; font-size: 3.5rem; 
+            color: #d4af37; margin: 20px 0; 
         }
 
-        /* --- STYLE VIDEO FULL SCREEN --- */
+        /* --- VIDEO FULL SCREEN (Tetap Full) --- */
         #video-wrapper {
-            width: 100vw; /* Lebar penuh layar */
-            height: 100vh; /* Tinggi penuh layar */
+            width: 100vw; 
+            height: 100vh; 
             margin: 0;
-            border-radius: 0; /* Sudut lancip (tanpa lengkungan) */
-            border: none; /* Hilangkan border */
             overflow: hidden;
             background: #000;
             position: relative;
@@ -74,44 +72,42 @@
         #video-wrapper video {
             width: 100%; 
             height: 100%; 
-            object-fit: cover; /* Video memenuhi layar (mungkin sedikit terpotong di pinggir tapi full layar) */
+            object-fit: cover; /* Video full layar */
         }
 
-        /* --- STYLE GALLERY FULL SCREEN (FOTO 2, 3, dst) --- */
+        /* --- GALLERY FULL LEBAR (Rapi & Tidak Terpotong) --- */
         .gallery {
-            display: block; /* Ubah dari Grid menjadi Block (Tumpuk ke bawah) */
+            display: block;
             width: 100%;
             padding: 0;
             margin: 0;
         }
         
         .gallery img {
-            width: 100vw; /* Lebar penuh layar */
-            height: 100vh; /* Tinggi penuh layar per foto */
-            object-fit: cover; /* Foto memenuhi layar */
-            border: none;
-            border-radius: 0;
-            margin: 0;
+            width: 100vw; /* Lebar penuh kiri ke kanan */
+            height: auto; /* Tinggi mengikuti asli foto (tidak gepeng) */
             display: block;
+            margin-bottom: 5px; /* Sedikit jarak antar foto */
+            /* Jika ingin foto agak besar tapi tidak full screen, ganti auto dengan 80vh */
         }
 
         /* Card Informasi */
         .glass-card {
-            background: rgba(25, 25, 25, 0.9);
+            background: rgba(25, 25, 25, 0.95);
             border: 1px solid #d4af37; border-radius: 20px;
-            padding: 35px 25px; margin: 25px auto;
-            width: 92vw; max-width: 380px; text-align: center;
+            padding: 30px 20px; margin: 30px auto;
+            width: 90vw; max-width: 380px; text-align: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .timer { display: flex; justify-content: center; gap: 12px; margin-top: 20px; }
-        .timer div { border: 1px solid #d4af37; padding: 10px; border-radius: 12px; min-width: 70px; }
-        .timer span { display: block; font-size: 22px; font-weight: bold; color: #d4af37; }
-        .timer label { font-size: 9px; letter-spacing: 1px; }
+        .timer { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
+        .timer div { border: 1px solid #d4af37; padding: 8px; border-radius: 12px; min-width: 60px; }
+        .timer span { display: block; font-size: 20px; font-weight: bold; color: #d4af37; }
+        .timer label { font-size: 8px; letter-spacing: 1px; }
 
         .btn-wa {
             display: inline-block; background: #d4af37; color: #000;
-            padding: 13px 30px; border-radius: 50px; text-decoration: none;
+            padding: 12px 30px; border-radius: 50px; text-decoration: none;
             font-weight: bold; margin-top: 20px; width: 100%; transition: 0.3s;
         }
     </style>
@@ -122,13 +118,12 @@
     <img src="https://www.transparentpng.com/download/floral/wedding-invitation-floral-frame-free-png-G6XlF6.png" class="floral bottom-left">
 
     <div id="overlay">
-        <p style="letter-spacing: 6px; font-size: 11px;">THE WEDDING OF</p>
-        <h1 style="font-family: 'Sacramento'; font-size: 3.5rem; color: #d4af37; margin: 20px 0;">Romeo & Juliet</h1>
-        <p style="font-size: 13px; color: #888;">Yth. Tamu Undangan</p>
+        <p style="letter-spacing: 5px; font-size: 10px;">THE WEDDING OF</p>
+        <h1 style="font-family: 'Sacramento'; font-size: 3.5rem; color: #d4af37; margin: 15px 0;">Romeo & Juliet</h1>
+        <p style="font-size: 12px; color: #888;">Yth. Tamu Undangan</p>
         <button class="btn-open" onclick="startApp()">Buka Undangan</button>
     </div>
 
-    <!-- MUSIK JAMRUD -->
     <audio id="bgm" loop preload="auto">
         <source src="https://archive.org/download/JamrudFullAlbumTerimaKasih/Jamrud Full Album Terima Kasih 1998.mp3" type="audio/mpeg">
     </audio>
@@ -139,7 +134,7 @@
                 <img src="AI (6).jpg" class="main-photo">
             </div>
             <h1 class="couple-name">Romeo & Juliet</h1>
-            <p style="letter-spacing: 4px; font-size: 13px; color: #aaa;">14 FEBRUARI 2026</p>
+            <p style="letter-spacing: 3px; font-size: 12px; color: #aaa;">14 FEBRUARI 2026</p>
         </div>
 
         <!-- VIDEO FULL SCREEN -->
@@ -147,7 +142,7 @@
             <video id="video" autoplay muted controls playsinline></video>
         </div>
 
-        <!-- GALLERY FULL SCREEN (Foto 2, 3, 4) -->
+        <!-- GALLERY (Full Lebar, Tinggi Pas/Asli) -->
         <div class="gallery">
             <img src="AI (71).jpg">
             <img src="AI (80).jpg">
@@ -156,15 +151,15 @@
         </div>
 
         <div class="glass-card">
-            <h3 style="font-family: 'Playfair Display'; font-style: italic; font-size: 1.5rem;">Save The Date</h3>
-            <div style="height: 1px; background: #d4af37; width: 60px; margin: 15px auto;"></div>
+            <h3 style="font-family: 'Playfair Display'; font-style: italic; font-size: 1.4rem;">Save The Date</h3>
+            <div style="height: 1px; background: #d4af37; width: 50px; margin: 15px auto;"></div>
             <p style="margin-top: 15px; font-weight: 600;">AKAD & RESEPSI</p>
-            <p style="font-size: 14px; color: #bbb;">Sabtu, 14 Februari 2026</p>
-            <p style="margin-top: 10px; font-size: 14px;">Gedung Agung Digital, Jakarta</p>
+            <p style="font-size: 13px; color: #bbb;">Sabtu, 14 Februari 2026</p>
+            <p style="margin-top: 8px; font-size: 13px;">Gedung Agung Digital, Jakarta</p>
         </div>
 
         <div class="glass-card">
-            <p style="font-size: 11px; letter-spacing: 3px;">COUNTDOWN</p>
+            <p style="font-size: 10px; letter-spacing: 2px;">COUNTDOWN</p>
             <div class="timer">
                 <div><span id="d">0</span><label>HARI</label></div>
                 <div><span id="h">0</span><label>JAM</label></div>
@@ -177,7 +172,7 @@
             <a href="https://wa.me/628123456789?text=Saya%20akan%20datang" class="btn-wa">RSVP VIA WHATSAPP</a>
         </div>
         
-        <div style="height: 100px;"></div>
+        <div style="height: 80px;"></div>
     </div>
 
 <script>
