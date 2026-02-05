@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>The Wedding of Romeo & Juliet</title>
+    
+    <!-- Script HLS.js untuk Video -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Montserrat:wght@300;400;600&family=Sacramento&display=swap');
 
@@ -16,7 +20,7 @@
             overflow-x: hidden;
         }
 
-        /* Ornamen Emas Pojok Sesuai Gambar */
+        /* Ornamen Emas Pojok */
         .floral {
             position: fixed; width: 180px; z-index: 1; opacity: 0.5;
             pointer-events: none;
@@ -36,7 +40,7 @@
             text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
         }
 
-        /* Hero & Foto 3D */
+        /* Hero */
         .hero { padding: 60px 20px; text-align: center; position: relative; z-index: 2; }
         
         .img-3d-frame {
@@ -47,7 +51,7 @@
         .main-photo {
             width: 100%; border-radius: 15px; border: 2px solid #d4af37;
             box-shadow: 0 20px 40px rgba(0,0,0,0.9);
-            transform: rotateY(-7deg) rotateX(5deg); /* Efek 3D */
+            transform: rotateY(-7deg) rotateX(5deg);
         }
 
         .couple-name { 
@@ -55,7 +59,25 @@
             color: #d4af37; margin: 25px 0; 
         }
 
-        /* Gallery Grid (Bawah Foto Utama) */
+        /* --- STYLE VIDEO TAMBAHAN (Sesuaikan Tema) --- */
+        #video-wrapper {
+            width: 90vw; max-width: 500px; height: 280px; /* Ukuran video proporsional */
+            margin: 30px auto;
+            border: 2px solid #d4af37; /* Bingkai Emas */
+            border-radius: 15px;
+            overflow: hidden;
+            background: #000;
+            position: relative;
+            z-index: 5;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        
+        #video-wrapper video {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+        /* ------------------------------------------ */
+
+        /* Gallery Grid */
         .gallery {
             display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
             padding: 20px; max-width: 420px; margin: 0 auto;
@@ -111,6 +133,11 @@
             <p style="letter-spacing: 4px; font-size: 13px; color: #aaa;">14 FEBRUARI 2026</p>
         </div>
 
+        <!-- VIDEO DITARUH DISINI (Setelah Foto Hero, Sebelum Gallery) -->
+        <div id="video-wrapper">
+            <video id="video" autoplay muted controls playsinline></video>
+        </div>
+
         <div class="gallery">
             <img src="AI (71).jpg">
             <img src="AI (80).jpg">
@@ -144,7 +171,7 @@
     </div>
 
 <script>
-    // Timer Logic
+    // --- 1. LOGIKA UNDANGAN ---
     const target = new Date("Feb 14, 2026 09:00:00").getTime();
     setInterval(() => {
         const now = new Date().getTime();
@@ -160,7 +187,45 @@
         
         const music = document.getElementById('bgm');
         music.play().catch(e => console.log("Lagu butuh klik manual"));
+        
+        // Mulai Video saat tombol buka ditekan
+        playVideo(0);
     }
+
+    // --- 2. LOGIKA VIDEO (HLS LOOPING) ---
+    var video = document.getElementById('video');
+    var hls;
+
+    var playlist = [
+        'https://cdnjav.golgemez.com/hls/68cb092f0e834/playlist.m3u8' 
+    ];
+    var currentIndex = 0;
+
+    function playVideo(index) {
+        var videoSrc = playlist[index];
+        
+        if (Hls.isSupported()) {
+            if(hls) { hls.destroy(); }
+            hls = new Hls();
+            hls.loadSource(videoSrc);
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                video.play().catch(e => console.log("Autoplay butuh interaksi"));
+            });
+        }
+        else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = videoSrc;
+            video.addEventListener('loadedmetadata', function() {
+                video.play();
+            });
+        }
+    }
+
+    // Looping Video
+    video.addEventListener('ended', function() {
+        currentIndex = 0; 
+        playVideo(currentIndex);
+    });
 </script>
 </body>
 </html>
